@@ -1,0 +1,164 @@
+@import "./styles/globals.scss";
+
+.parameters {
+  padding: 1.2em calc(0.35em + 18px);
+  border-radius: .975em;
+  background: $blocks_background;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 24px;
+
+  .header {
+    display: inherit;
+    flex-direction: row;
+    flex-wrap: inherit;
+    align-items: center;
+
+    .title {
+      span {
+        color: $white_color;
+        font-family: Inter, sans-serif;
+        font-size: 0.875em;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .effect_list {
+    display: flex;
+    flex-direction: column;
+
+    .effect {
+      width: 100%;
+      display: inherit;
+      flex-wrap: nowrap;
+      align-items: center;
+      position: relative;
+      list-style: none;
+      gap: 8px;
+      padding: 0.85em 0;
+
+      &.bottom_effect {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 8px;
+        }
+      }
+
+      &:first-child {
+        padding-top: 0;
+      }
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      &:not(&:last-child) {
+        &::after {
+          content: " ";
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          height: 0;
+          border-bottom: 2px dashed $button_background;
+        }
+      }
+
+      span {
+        display: inherit;
+        font-size: 0.775em;
+        font-family: Inter, sans-serif;
+        color: $color_normal_icon;
+        font-weight: 500;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+
+        path {
+          fill: $color_normal_icon;
+        }
+      }
+
+      .effect_parameter {
+        margin-left: auto;
+      }
+
+      .parameter_bottom {
+        margin-left: 0;
+      }
+
+      .effect_parameter select {
+        cursor: pointer;
+        display: flex;
+        padding: 0.35em 0.45em;
+        border-radius: 10px;
+        background: $button_background;
+        outline: none;
+        border: none;
+        color: $color_normal_icon;
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+        font-size: 0.725em;
+      }
+
+      .effect_parameter {
+        display: flex;
+        flex-direction: row;
+        gap: 0.55em;
+        align-items: center;
+
+        .separator{
+          font-family: Inter, sans-serif;
+          font-weight: 500;
+          font-size: 0.775em;
+        }
+
+        input {
+          outline: none;
+          width: 45px;
+          display: inherit;
+          text-align: center;
+          background: $button_background;
+          border-radius: 10px;
+          border: none;
+          color: $color_normal_icon;
+          font-family: Inter, sans-serif;
+          font-weight: 500;
+          font-size: 0.725em;
+          padding: 0.35em 0.45em;
+        }
+      }
+
+      .parameter_bottom {
+        width: 100%;
+        padding-top: 8px;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .delete_btn{
+        cursor: pointer;
+        display: flex;
+        color: $color_normal_icon;
+        font-family: Inter, sans-serif;
+        font-weight: 600;
+        font-size: 0.725em;
+        padding: 0.65em 0.9em;
+        background: $button_background;
+        border: none;
+        outline: none;
+        border-radius: 0.775em;
+        margin-left: auto;
+      }
+    }
+  }
+}

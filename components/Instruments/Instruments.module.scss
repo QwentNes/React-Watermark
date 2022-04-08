@@ -1,0 +1,84 @@
+@import "./styles/globals.scss";
+
+.instruments_block {
+  background: $blocks_background;
+  display: inherit;
+  position: relative;
+  justify-content: flex-start;
+  padding: 1.2em 0.35em;
+  border-radius: .975em;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 0.725em;
+  height: 500px;
+
+  .tooltip {
+    user-select: none;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    padding: 0.5em 0.75em;
+    border-radius: 0.3em;
+    background: $button_background;
+    margin-left: 1.2em;
+
+    &:after{
+      content: " ";
+      background: transparent;
+      position: absolute;
+      left: -0.9em;
+      border: 0.5em solid transparent;
+      border-right: 0.5em solid $button_background;
+    }
+
+    .arrow {
+      background: red;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-family: Inter, sans-serif;
+      font-weight: 400;
+      font-size: 0.85em;
+      color: $white_color;
+    }
+  }
+
+  li.item {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0.65em 1.1em;
+    border-radius: .45em;
+    transition: 0.25s;
+
+    &:hover {
+      transition: 0.25s;
+      background: $button_background;
+
+      path {
+        fill: $white_color;
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+
+      path {
+        fill: $color_normal_icon;
+      }
+    }
+  }
+
+  .github {
+    margin-top: auto;
+
+    svg {
+      height: 28px;
+      width: 28px;
+    }
+  }
+}

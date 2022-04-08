@@ -1,0 +1,71 @@
+@import "./styles/globals.scss";
+
+.input_group {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   gap: 1em;
+
+   input[type=text] {
+     outline: none;
+     width: 100%;
+     background: transparent;
+     border: 2px solid $button_background;
+     border-radius: 0.45em;
+     box-sizing: border-box;
+     padding: 10px;
+     color: $white_color;
+     font-size: 0.85em;
+     font-family: Inter, sans-serif;
+     font-weight: 300;
+   }
+
+   input[type=submit] {
+     cursor: pointer;
+     color: $white_color;
+     font-size: 0.825em;
+     font-family: Inter, sans-serif;
+     font-weight: 400;
+     border-radius: 0.45em;
+     box-sizing: border-box;
+     padding: 0 12px;
+     border: none;
+     background: $color_active_icon;
+   }
+ }
+
+.drop_file {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  padding: 25px 16px;
+  border-radius: 0.45em;
+  border: 2px dashed $button_background;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  user-select: none;
+
+  span {
+    font-size: 0.85em;
+    color: $white_color;
+    font-family: Inter, sans-serif;
+
+    a{
+      cursor: pointer;
+      color: $color_active_icon;
+    }
+  }
+
+  svg {
+    display: flex;
+    width: 28px;
+    height: 28px;
+
+    path {
+      fill: $white_color;
+    }
+  }
+}

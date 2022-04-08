@@ -1,0 +1,47 @@
+@import "./styles/globals.scss";
+
+.item_download{
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 18px;
+  border: 2px solid $button_background;
+  padding: 0.8em 1em;
+  border-radius: 0.65em;
+  box-sizing: border-box;
+  user-select: none;
+
+  .doc_info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .name{
+      opacity: .9;
+      font-size: 0.875em;
+      font-family: Inter, sans-serif;
+      color: $white_color;
+      font-weight: 500;
+    }
+    .size{
+      opacity: .575;
+      font-size: 0.65em;
+      font-family: Inter, sans-serif;
+      color: $white_color;
+      font-weight: 400;
+    }
+  }
+
+  svg{
+    width: 32px;
+    height: 32px;
+
+    path{
+      opacity: .9;
+      fill: $white_color;
+    }
+  }
+}

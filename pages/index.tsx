@@ -1,9 +1,12 @@
 import type {NextPage} from 'next'
 import style from '../styles/Home.module.scss'
+import MainLayout from "../layouts/MainLayout";
 
 const Home: NextPage = () => {
     return (
-        <div className={style.content}>123</div>
+       <MainLayout>
+
+       </MainLayout>
     )
 }
 
