@@ -1,6 +1,6 @@
 import * as React from 'react';
 import style from "./Instruments.module.scss";
-import {useFloating, arrow, autoUpdate} from '@floating-ui/react-dom';
+import {useFloating, autoUpdate} from '@floating-ui/react-dom';
 import {motion} from 'framer-motion';
 
 interface BarProps {
@@ -43,11 +43,8 @@ const BarItem: React.FC<ItemProps> = ({item}) => {
 
     const [Show, setShow] = React.useState<boolean>(false);
 
-    const arrowRef = React.useRef(null);
-
     const {x, y, reference, floating, update, refs} = useFloating({
         placement: 'right',
-        middleware: [arrow({element: arrowRef})],
     })
 
     const anim = {
@@ -93,7 +90,6 @@ const BarItem: React.FC<ItemProps> = ({item}) => {
             >
                 {item.icon}
             </motion.li>
-
             <motion.div
                 initial={false}
                 variants={anim}

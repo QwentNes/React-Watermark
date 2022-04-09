@@ -1,10 +1,10 @@
 import * as React from 'react';
 import style from '../styles/MainLayout.module.scss';
 import Image from 'Next/Image';
-import classNames from 'classnames/bind';
 import InstrumentsBar from "../components/Instruments";
 import {Instruments} from "../resources/Instruments";
 import Parameters from "../components/Parameters";
+import Playground from "../components/Playground";
 
 interface LayoutProps {
 
@@ -14,14 +14,19 @@ const MainLayout: React.FC<LayoutProps> = ({children}) => {
     const loader = ({src} : any) => {
         return src
     }
+
+    let data = {
+        size:{
+            width: 1880,
+            height: 1250,
+        },
+        link: "https://images.pexels.com/photos/2537391/pexels-photo-2537391.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    }
     return (
         <div className={style.wrapper}>
             <div className={style.container}>
                 <InstrumentsBar data={Instruments} />
-                <div className={style.content}>
-                    <div className={style.image_shell}>
-                    </div>
-                </div>
+                <Playground data={data}/>
                 <div className={style.side}>
                     <div className={style.resource}>
                         <div className={style.header}>

@@ -39,6 +39,15 @@
       gap: 8px;
       padding: 0.85em 0;
 
+      svg {
+        width: 18px;
+        height: 18px;
+
+        path {
+          fill: $color_normal_icon;
+        }
+      }
+
       &.bottom_effect {
         flex-direction: column;
         align-items: flex-start;
@@ -77,35 +86,12 @@
         font-weight: 500;
       }
 
-      svg {
-        width: 18px;
-        height: 18px;
-
-        path {
-          fill: $color_normal_icon;
-        }
-      }
-
       .effect_parameter {
         margin-left: auto;
       }
 
       .parameter_bottom {
         margin-left: 0;
-      }
-
-      .effect_parameter select {
-        cursor: pointer;
-        display: flex;
-        padding: 0.35em 0.45em;
-        border-radius: 10px;
-        background: $button_background;
-        outline: none;
-        border: none;
-        color: $color_normal_icon;
-        font-family: Inter, sans-serif;
-        font-weight: 500;
-        font-size: 0.725em;
       }
 
       .effect_parameter {

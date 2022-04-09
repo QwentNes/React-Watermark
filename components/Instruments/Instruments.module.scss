@@ -13,6 +13,7 @@
   height: 500px;
 
   .tooltip {
+    z-index: 5;
     user-select: none;
     display: flex;
     position: absolute;

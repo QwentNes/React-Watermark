@@ -1,0 +1,60 @@
+@import "./styles/globals.scss";
+
+.content {
+  width: 67%;
+  height: 500px;
+  overflow: hidden;
+  user-select: none !important;
+  cursor: pointer;
+
+  .shell {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1;
+    box-sizing: border-box;
+    border-radius: .975em;
+    position: relative;
+    transform: scale(1);
+    grid-area: canvas;
+
+    .scroll_block {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow: auto;
+      display: flex;
+      @include scrollbars(7px, gray, $button_background);
+
+      .playground_sizer {
+        margin: auto;
+        display: inherit;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: center;
+        position: relative;
+
+        .playground {
+          cursor: pointer;
+          display: block;
+          direction: ltr;
+          position: relative;
+          flex-shrink: 0;
+          background-color: $white_color;
+          background-image: repeating-linear-gradient(45deg, #BABABA 25%, transparent 25%, transparent 75%, #BABABA 75%, #BABABA), repeating-linear-gradient(45deg, #BABABA 25%, $white_color 25%, $white_color 75%, #BABABA 75%, #BABABA);
+          background-position: 0 0, 23px 23px;
+          background-size: 45px 45px;
+
+          img {
+            touch-action: none;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+}

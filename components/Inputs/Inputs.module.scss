@@ -1,0 +1,130 @@
+@import "./styles/globals.scss";
+
+
+.effect_parameter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  position: relative;
+}
+
+.selected {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0.35em 0.45em;
+  border-radius: 8px;
+  background: $button_background;
+  outline: none;
+  border: none;
+  gap: 4px;
+
+  .icon_dropdown {
+    display: flex;
+  }
+
+  span {
+    color: $color_normal_icon;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 0.925em;
+  }
+
+  svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+
+.select_list {
+  user-select: none;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 5px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  position: absolute;
+  padding: 0.35em 0.25em;
+  border-radius: 8px;
+  background: $button_background;
+  list-style: none;
+
+  li {
+    color: $color_normal_icon;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 0.8em;
+    cursor: pointer;
+    width: 100%;
+    padding: 0.35em 0.4em;
+    box-sizing: border-box;
+    border-radius: 0.3em;
+    background: transparent;
+    transition: 1s;
+
+    &:hover {
+      color: $white_color;
+    }
+  }
+}
+
+.parameter_bottom {
+  width: 100%;
+  padding-top: 8px;
+
+  .max_range{
+    margin-left: 20px;
+  }
+}
+
+.range_block {
+  height: 22.5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  position: relative;
+
+  .line {
+    background: $button_background;
+    height: 6px;
+    border-radius: 8px;
+  }
+
+  .pointer {
+    left: 0;
+    outline: none;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 99em;
+    background: $color_active_icon;
+    border: 2px solid $white_color;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(120, 68, 236, .55);
+
+    .counter{
+      display: flex;
+      width: auto;
+      height: auto;
+      position: absolute;
+      bottom: -25px;
+      background: $button_background;
+      padding: 2px 4px;
+      border-radius: 4px;
+
+      span{
+        font-weight: 400;
+        font-family: Inter, sans-serif;
+        font-size: 0.75em;
+        color: $color_active_icon;
+      }
+    }
+  }
+}

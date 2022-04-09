@@ -1,6 +1,7 @@
 import * as React from 'react';
 import style from './Parameters.module.scss';
 import classNames from "classnames/bind";
+import {Slider, Select} from "../Inputs";
 
 interface ParametersProps {
 
@@ -23,11 +24,7 @@ const Parameters: React.FC<ParametersProps> = ({}) => {
                         <path d="M7.85 22.75H5.15C2.49 22.75 1.25 21.51 1.25 18.85V16.15C1.25 13.49 2.49 12.25 5.15 12.25H7.85C10.51 12.25 11.75 13.49 11.75 16.15V18.85C11.75 21.51 10.51 22.75 7.85 22.75ZM5.15 13.75C3.31 13.75 2.75 14.31 2.75 16.15V18.85C2.75 20.69 3.31 21.25 5.15 21.25H7.85C9.69 21.25 10.25 20.69 10.25 18.85V16.15C10.25 14.31 9.69 13.75 7.85 13.75H5.15V13.75Z" />
                     </svg>
                     <span>Эффект наложения</span>
-                    <div className={style.effect_parameter}>
-                        <select>
-                            <option>Normal</option>
-                        </select>
-                    </div>
+                    <Select />
                 </li>
                 <li className={classNames(style.effect, style.bottom_effect)}>
                     <div className={style.title}>
@@ -36,9 +33,7 @@ const Parameters: React.FC<ParametersProps> = ({}) => {
                         </svg>
                         <span>Прозрачность метки</span>
                     </div>
-                    <div className={classNames(style.effect_parameter, style.parameter_bottom)}>
-                        <input type="range" min="0" max="100" step="5" value="10" />
-                    </div>
+                    <Slider />
                 </li>
                 <li className={style.effect}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">

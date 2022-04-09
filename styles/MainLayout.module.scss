@@ -25,23 +25,12 @@
                     $gray_background 0px 100px
     );
 
-
-    .content {
-      width: 67%;
-
-      .image_shell {
-        width: 100%;
-        height: 500px;
-        border-radius: .975em;
-        background: black;
-      }
-    }
-
     .side {
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
       flex-grow: 1;
+      max-width: 310px;
       position: relative;
       gap: 1.9em;
 
