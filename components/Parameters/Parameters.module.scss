@@ -86,51 +86,6 @@
         font-weight: 500;
       }
 
-      .effect_parameter {
-        margin-left: auto;
-      }
-
-      .parameter_bottom {
-        margin-left: 0;
-      }
-
-      .effect_parameter {
-        display: flex;
-        flex-direction: row;
-        gap: 0.55em;
-        align-items: center;
-
-        .separator{
-          font-family: Inter, sans-serif;
-          font-weight: 500;
-          font-size: 0.775em;
-        }
-
-        input {
-          outline: none;
-          width: 45px;
-          display: inherit;
-          text-align: center;
-          background: $button_background;
-          border-radius: 10px;
-          border: none;
-          color: $color_normal_icon;
-          font-family: Inter, sans-serif;
-          font-weight: 500;
-          font-size: 0.725em;
-          padding: 0.35em 0.45em;
-        }
-      }
-
-      .parameter_bottom {
-        width: 100%;
-        padding-top: 8px;
-
-        input {
-          width: 100%;
-        }
-      }
-
       .delete_btn{
         cursor: pointer;
         display: flex;

@@ -4,7 +4,7 @@ import Image from 'Next/Image';
 import InstrumentsBar from "../components/Instruments";
 import {Instruments} from "../resources/Instruments";
 import Parameters from "../components/Parameters";
-import Playground from "../components/Playground";
+import Workspace from "../components/Workspace";
 
 interface LayoutProps {
 
@@ -14,19 +14,11 @@ const MainLayout: React.FC<LayoutProps> = ({children}) => {
     const loader = ({src} : any) => {
         return src
     }
-
-    let data = {
-        size:{
-            width: 1880,
-            height: 1250,
-        },
-        link: "https://images.pexels.com/photos/2537391/pexels-photo-2537391.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-    }
     return (
         <div className={style.wrapper}>
             <div className={style.container}>
                 <InstrumentsBar data={Instruments} />
-                <Playground data={data}/>
+                <Workspace />
                 <div className={style.side}>
                     <div className={style.resource}>
                         <div className={style.header}>

@@ -128,3 +128,29 @@
     }
   }
 }
+
+.effect_size{
+  gap: 0.55em;
+
+  .separator{
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 0.775em;
+  }
+
+  input {
+    outline: none;
+    width: 45px;
+    display: inherit;
+    text-align: center;
+    background: $button_background;
+    border-radius: 10px;
+    border: none;
+    color: $color_normal_icon;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 0.725em;
+    padding: 0.35em 0.45em;
+  }
+}
+
