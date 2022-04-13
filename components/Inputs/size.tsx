@@ -1,6 +1,5 @@
 import * as React from 'react';
 import style from "./Inputs.module.scss";
-import {motion} from 'framer-motion';
 import classNames from "classnames";
 
 interface SizeProps {

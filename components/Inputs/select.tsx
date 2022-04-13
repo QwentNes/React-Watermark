@@ -8,7 +8,6 @@ interface SelectProps {
 }
 
 const Select: React.FC<SelectProps> = ({}) => {
-    const [select, setSelect] = React.useState<number>(0)
     const [show, setShow] = React.useState<boolean>(false)
 
     const {x, y, reference, floating} = useFloating({

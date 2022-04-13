@@ -2,6 +2,8 @@ import * as React from 'react';
 import Watermark from "../Watermark";
 import Playground from "../Playground";
 import {useMousePosition} from "../../hook/useMousePosition";
+import Editor from "../Editor";
+import {useStores} from "../../hook/useStores";
 
 interface WorkspaceProps {
 
@@ -10,20 +12,19 @@ interface WorkspaceProps {
 const Workspace: React.FC<WorkspaceProps> = ({}) => {
 
     const wrapRef = React.useRef(null) as React.MutableRefObject<any>
-    const [scale, setScale] = React.useState(0.65)
     const position = useMousePosition(wrapRef);
-
-    let data = {
-        size:{
-            width: 1880,
-            height: 1250,
-        },
-        link: "https://images.pexels.com/photos/2537391/pexels-photo-2537391.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-    }
+    const {watermarks, playground} = useStores()
 
     return (
-        <Playground data={data} innerRef={wrapRef} position={position} scale={{meaning: scale, setScale}}>
-            <Watermark position={position} scale={scale} />
+        <Playground innerRef={wrapRef} position={position}>
+            {
+                watermarks.list.map((item, index) => {
+                    return <Watermark id={item.id} key={`watermark_`+index} />
+                })
+            }
+            {
+                playground.config.edit != -1 && <Editor position={position} />
+            }
         </Playground>
     );
 };

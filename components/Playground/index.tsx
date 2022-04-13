@@ -1,33 +1,26 @@
 import React, {useEffect} from 'react';
+import {useDimensions} from "../../hook/useDimensions";
+import {observer} from "mobx-react-lite";
+import {TMousePosition} from "../../types/main";
 import style from "./Playground.module.scss";
 import {motion} from 'framer-motion'
-import {useDimensions} from "../../hook/useDimensions";
+import {useStores} from "../../hook/useStores";
 
 interface PlaygroundProps {
-    data: {
-        size: {
-            width: number,
-            height: number,
-        },
-        link: string,
-    },
     innerRef: React.RefObject<any>,
-    position: {
-        x: number,
-        y: number
-    },
-    scale: {
-        meaning: number,
-        setScale: React.Dispatch<React.SetStateAction<number>>,
-    }
+    position: TMousePosition,
 }
 
-const Playground: React.FC<PlaygroundProps> = ({data, innerRef, scale, position, children}) => {
+const Playground: React.FC<PlaygroundProps> = observer(({innerRef, position, children}) => {
+    const {playground} = useStores()
 
+    const data = playground.config;
+    const scale = data.scale;
     const sizeRef = React.useRef(null) as React.MutableRefObject<any>
+
     const [sizer, setSizer] = React.useState({
-        width: data.size.width * scale.meaning,
-        height: data.size.height * scale.meaning,
+        width: data.size.width * scale,
+        height: data.size.height * scale,
     })
     const dimensions = useDimensions(innerRef, [sizer])
 
@@ -35,7 +28,7 @@ const Playground: React.FC<PlaygroundProps> = ({data, innerRef, scale, position,
         const Resizer = (e: React.WheelEvent): void => {
             if (e.ctrlKey) {
                 e.preventDefault()
-                let scaleResult = scale.meaning + (e.deltaY > 0 ? -0.05 : 0.05);
+                let scaleResult = scale + (e.deltaY > 0 ? -0.05 : 0.05);
 
 
                 if (scaleResult > 0.10) {
@@ -44,7 +37,7 @@ const Playground: React.FC<PlaygroundProps> = ({data, innerRef, scale, position,
                         height: data.size.height * scaleResult,
                     })
 
-                    scale.setScale(scaleResult)
+                    playground.setScale(scaleResult)
                 }
 
                 const x = position.x !== 0 ? position.x : sizeRef.current.scrollLeft + sizeRef.current.clientWidth / 2;
@@ -75,7 +68,7 @@ const Playground: React.FC<PlaygroundProps> = ({data, innerRef, scale, position,
                                         animate={{
                                             width: data.size.width,
                                             height: data.size.height,
-                                            scale: scale.meaning
+                                            scale: scale
                                         }}
                                         transition={{
                                             type: "Inertia",
@@ -90,6 +83,6 @@ const Playground: React.FC<PlaygroundProps> = ({data, innerRef, scale, position,
             </div>
         </div>
     );
-};
+});
 
 export default Playground
