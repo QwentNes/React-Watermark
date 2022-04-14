@@ -5,11 +5,13 @@ import {Range} from 'react-range';
 
 
 interface SliderProps {
-
+    value: number,
+    setState: (value: number) => void
 }
 
-const Slider: React.FC<SliderProps> = ({}) => {
-    const [values, setValue] = React.useState<number>(50)
+const Slider: React.FC<SliderProps> = ({value, setState}) => {
+    const [values, setValue] = React.useState<number>(value * 100)
+
     return (
         <div className={classNames(style.effect_parameter, style.parameter_bottom)}>
             <div className={style.range_block}>
@@ -17,7 +19,12 @@ const Slider: React.FC<SliderProps> = ({}) => {
                        min={0}
                        max={100}
                        values={[values]}
-                       onChange={(values) => setValue(values[0])}
+                       onChange={
+                           (values) => {
+                               setValue(values[0])
+                               setState(values[0] / 100)
+                           }
+                       }
                        renderTrack={({props, children}) => (
                            <div className={style.line}
                                 {...props}

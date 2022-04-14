@@ -31,7 +31,7 @@ const Playground: React.FC<PlaygroundProps> = observer(({innerRef, position, chi
                 let scaleResult = scale + (e.deltaY > 0 ? -0.05 : 0.05);
 
 
-                if (scaleResult > 0.10) {
+                if (scaleResult > 0.3) {
                     setSizer({
                         width: data.size.width * scaleResult,
                         height: data.size.height * scaleResult,

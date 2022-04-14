@@ -3,18 +3,23 @@ import style from "./Inputs.module.scss";
 import classNames from "classnames";
 
 interface SizeProps {
-
+    value: {
+        width: number,
+        height: number
+    }
+    setState: (width: number, height: number) => void
 }
 
-const Size: React.FC<SizeProps> = ({}) => {
+const Size: React.FC<SizeProps> = ({value, setState}) => {
 
-    const [size, setSize] = React.useState<{ width: number, height: number }>({width: 120, height: 60})
+    const [size, setSize] = React.useState<{ width: number, height: number }>({width: Math.round(value.width), height: Math.round(value.height)})
 
     const validate = (value: string | null | undefined, prev: number): number => {
-        if(isNaN(Number(value))){
+        let num = Number(value)
+        if(isNaN(num)){
             return prev
         }
-        return Number(value)
+        return num < 60 ? 60 : Number(value)
     }
 
     const handleChange = (data: { width?: string | null, height?: string | null }): void => {
@@ -23,6 +28,10 @@ const Size: React.FC<SizeProps> = ({}) => {
             height: validate(data.height, prev.height)
         }))
     }
+
+    React.useEffect(() => {
+        setState(size.width, size.height)
+    }, [size])
 
     return (
         <div className={classNames(style.effect_parameter, style.effect_size)}>

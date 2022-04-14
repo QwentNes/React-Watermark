@@ -6,6 +6,9 @@ const POSITION_TOP = "position_top"
 const POSITION_LEFT = "position_left"
 const SIZE_WIDTH = "size_width"
 const SIZE_HEIGHT = "size_height"
+const MODE = "mode"
+const OPACITY = "opacity"
+const ZINDEX = "zIndex"
 
 
 
@@ -22,16 +25,19 @@ export class watermarks {
             },
             current: {
                 mode: 'normal',
+                opacity: 1,
                 position: {
-                    top: 9,
-                    left: 7,
+                    top: 550,
+                    left: 250,
                 },
                 size: {
                     width: 550,
                     height: 550,
                 },
-            }
+                zIndex: 1,
+            },
         },
+
     ]
 
     constructor() {
@@ -63,7 +69,20 @@ export class watermarks {
             case SIZE_HEIGHT:
                 item.size.height = value
                 break;
+            case MODE:
+                item.mode = value
+                break;
+            case OPACITY:
+                item.opacity = value
+                break;
+            case ZINDEX:
+                item.zIndex = value
+                break;
         }
+    }
+
+    public delete = (id: number): void => {
+        this.list = this.list.filter(item => item.id !== id);
     }
 
 }

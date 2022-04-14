@@ -136,3 +136,19 @@
   position: absolute;
   z-index: 1;
 }
+
+.preset_black{
+  filter: grayscale(100%);
+}
+
+.preset_invert{
+  filter: invert(100%);
+}
+
+.preset_contrast{
+  filter: contrast(1.5);
+}
+
+.preset_blur{
+  filter: blur(3px);
+}

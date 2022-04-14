@@ -28,8 +28,10 @@ type TSizeElement = {
 
 type TConfig = {
     mode: string,
+    opacity: number,
     position: TPositionElement,
     size: TSizeElement,
+    zIndex: number,
 }
 
 export type TPlayground = {

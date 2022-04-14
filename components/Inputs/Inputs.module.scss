@@ -27,8 +27,13 @@
   span {
     color: $color_normal_icon;
     font-family: Inter, sans-serif;
+
     font-weight: 500;
     font-size: 0.925em;
+    text-overflow: ellipsis;
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   svg {

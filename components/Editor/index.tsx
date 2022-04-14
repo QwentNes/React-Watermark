@@ -33,16 +33,19 @@ const Editor: React.FC<EditorProps> = observer(({position}) => {
     }
 
     const shareBlock = (positioning : string) : number => {
-        switch (positioning){
-            case 'y':
-                // @ts-ignore
-                return fixed.y / (element.size.height * scale)
-            case 'x':
-                // @ts-ignore
-                return fixed.x / (element.size.width * scale)
-            default:
-                return 0
+        if(fixed.y != 0 && fixed.x != 0){
+            switch (positioning){
+                case 'y':
+                    // @ts-ignore
+                    return fixed.y / (element.size.height * scale)
+                case 'x':
+                    // @ts-ignore
+                    return fixed.x / (element.size.width * scale)
+                default:
+                    return 0
+            }
         }
+        return 0.5
     }
 
     React.useEffect(() => {

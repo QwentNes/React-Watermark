@@ -25,6 +25,15 @@
     }
   }
 
+  .no_element {
+    span {
+      font-size: 0.775em;
+      color: $color_normal_icon;
+      font-weight: 500;
+      font-family: Inter, sans-serif;
+    }
+  }
+
   .effect_list {
     display: flex;
     flex-direction: column;
@@ -63,6 +72,7 @@
       &:first-child {
         padding-top: 0;
       }
+
       &:last-child {
         padding-bottom: 0;
       }
@@ -86,7 +96,7 @@
         font-weight: 500;
       }
 
-      .delete_btn{
+      .delete_btn {
         cursor: pointer;
         display: flex;
         color: $color_normal_icon;
@@ -99,6 +109,25 @@
         outline: none;
         border-radius: 0.775em;
         margin-left: auto;
+      }
+
+      .effect_parameter{
+        display: flex;
+        margin-left: auto;
+        gap: 0.5em;
+
+        .position_btn {
+          cursor: pointer;
+          outline: none;
+          border: none;
+          border-radius: 8px;
+          background: $button_background;
+          font-family: Inter, sans-serif;
+          font-size: 0.85em;
+          font-weight: 500;
+          padding: 0.35em 0.65em;
+          color: $color_normal_icon;
+        }
       }
     }
   }
