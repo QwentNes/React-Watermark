@@ -1,6 +1,6 @@
 import React from 'react'
 import {makeAutoObservable} from "mobx";
-import {ProxyElement} from "../types/main";
+import {ProxyElement, TResource} from "../types/main";
 
 const POSITION_TOP = "position_top"
 const POSITION_LEFT = "position_left"
@@ -11,51 +11,52 @@ const OPACITY = "opacity"
 const ZINDEX = "zIndex"
 
 
-
 export class watermarks {
-    public list: Array<ProxyElement> = [
-        {
-            id: 1,
-            initial: {
-                link: "https://avatars.mds.yandex.net/get-zen_doc/3323369/pub_5ef21f5a41bbd50e24962d59_5ef21fa0bd439c08df624991/scale_1200",
-                size: {
-                    width: 250,
-                    height: 250,
-                },
-            },
-            current: {
-                mode: 'normal',
-                opacity: 1,
-                position: {
-                    top: 550,
-                    left: 250,
-                },
-                size: {
-                    width: 550,
-                    height: 550,
-                },
-                zIndex: 1,
-            },
-        },
+    private index = 1;
 
-    ]
+    public list: Array<ProxyElement> = []
 
     constructor() {
         makeAutoObservable(this, {}, {deep: true})
     }
 
+    public push = (data: TResource): void => {
+        let newElement: ProxyElement = {
+            id: this.index++,
+            initial: {
+                link: data.link,
+                size: data.size
+            },
+            current: {
+                mode: 'normal',
+                opacity: 1,
+                position: {
+                    top: 0,
+                    left: 0,
+                },
+                size: data.size,
+                zIndex: 1,
+            }
+        }
+        this.list.push(newElement)
+    }
+
     public find = (id: number): ProxyElement | undefined => {
         let result: ProxyElement | undefined;
+
         this.list.map(item => {
             if (item.id == id) {
                 result = item;
             }
         })
+
         return result;
     }
 
     public setParam = (id: number, param: string, value: any): void => {
-        const item = this.list[id - 1].current;
+
+        const item = this.list.filter(element => element.id == id)[0].current; // оптимизировать код
+
         switch (param) {
             case POSITION_TOP:
                 item.position.top = value

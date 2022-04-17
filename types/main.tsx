@@ -10,11 +10,6 @@ type TStateEdit = {
     set: ( v : number | null ) => void
 }
 
-export type TMousePosition = {
-    x: number,
-    y: number
-}
-
 type TPositionElement = {
     top: number,
     left: number
@@ -34,13 +29,6 @@ type TConfig = {
     zIndex: number,
 }
 
-export type TPlayground = {
-    link: string,
-    size: TSizeElement,
-    scale: number,
-    edit: number
-}
-
 type editing = {
     item: TStateEdit,
     config: TConfig | null,
@@ -51,6 +39,17 @@ type TItem = {
     current: TConfig
 }
 
+export type TResource = {
+    id: number,
+    link: string,
+    size: TSizeElement
+}
+
+export type TResponse = {
+    link: string,
+    size: TSizeElement
+}
+
 export type ProxyElement = {
     id: number,
     initial: {
@@ -58,4 +57,16 @@ export type ProxyElement = {
         size: TSizeElement
     },
     current: TConfig
+}
+
+export type TMousePosition = {
+    x: number,
+    y: number
+}
+
+export type TPlayground = {
+    link: string,
+    size: TSizeElement,
+    scale: number,
+    edit: number
 }
