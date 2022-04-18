@@ -136,8 +136,6 @@ interface NoFilesProps {
 
 const NoFiles: React.FC<NoFilesProps> = ({isDragActive, isShow}) => {
 
-    const transition = {duration: 4, yoyo: Infinity, ease: "easeInOut"}
-
     return (
         <>
             {isShow && <div className={style.no_files}>
