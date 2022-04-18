@@ -1,6 +1,7 @@
 import React from 'react'
 import {makeAutoObservable} from "mobx";
 import {TResource, TResponse} from "../types/main";
+import toast from 'react-hot-toast';
 
 export class resource {
     private index: number =  1;
@@ -18,5 +19,6 @@ export class resource {
             })
             this.index++;
         })
+        toast.success(`Загружены новые ресурсы`)
     }
 }

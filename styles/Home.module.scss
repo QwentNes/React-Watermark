@@ -1,0 +1,9 @@
+.side {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  width: 310px;
+  position: relative;
+  gap: 1.9em;
+}

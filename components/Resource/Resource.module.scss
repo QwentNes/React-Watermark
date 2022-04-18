@@ -1,8 +1,5 @@
 @import "./styles/globals.scss";
 
-@import "./styles/globals.scss";
-
-
 .resource {
   padding: 1.2em 0.35em;
   border-radius: .975em;
@@ -138,18 +135,21 @@
 }
 
 .loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  cursor: no-drop;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 12;
-  background: rgba(0, 0, 0, .25);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: no-drop;
+  background: rgba(27, 27, 35, 0.5);
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, .25);
+  border-radius: 0.25em;
+
 
   .logo_loader {
     margin-top: -50px;
@@ -157,5 +157,35 @@
 
   img {
     pointer-events: none;
+  }
+}
+
+.no_files {
+  width: 100%;
+  grid-area: 1 / 1 / 3 / 3;
+  height: calc(200px + 0.35em);
+  border-radius: 0.25em;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 2px dashed $button_background;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  svg {
+    width: 42px;
+    height: 42px;
+
+    path {
+      fill: $color_normal_icon;
+    }
+  }
+
+  .header {
+    font-family: Inter, sans-serif;
+    color: $color_normal_icon;
+    font-weight: 500;
+    font-size: 0.925em;
   }
 }

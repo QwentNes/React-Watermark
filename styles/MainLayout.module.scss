@@ -11,6 +11,7 @@
   background: $black_background;
 
   .container {
+    position: relative;
     align-items: flex-start;
     box-sizing: border-box;
     width: 1350px;
@@ -25,16 +26,6 @@
                     $black_background 0 50px,
                     $gray_background 0px 100px
     );
-
-    .side {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      flex-grow: 1;
-      width: 310px;
-      position: relative;
-      gap: 1.9em;
-    }
   }
 }
 

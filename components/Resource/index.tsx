@@ -6,6 +6,8 @@ import {motion} from 'framer-motion';
 import {useStores} from "../../hook/useStores";
 import {observer} from "mobx-react-lite";
 import classNames from "classnames";
+import toast from 'react-hot-toast';
+import {useUploadResource} from '../../hook/useUploadResource'
 
 import {useMutation} from "react-query";
 import {UploadResource} from "../../service/uploadResource";
@@ -15,24 +17,8 @@ interface ResourceProps {
 }
 
 const Resource: React.FC<ResourceProps> = observer(({}) => {
-    const {resource} = useStores()
     const dropzoneRef = createRef() as React.RefObject<any>
-
-    const {mutateAsync, isLoading} = useMutation('uploadRes', (data: FormData) => UploadResource.All(data), {
-        onSuccess: (response) => {
-            resource.push(JSON.parse(JSON.stringify(response.data)));
-        },
-    })
-
-    const sendFiles = async (acceptedFiles: Array<File>) => {
-        let DropFiles = new FormData()
-
-        acceptedFiles.map((item, index) => {
-            DropFiles.append(`file_${index}`, acceptedFiles[index])
-        })
-
-        await mutateAsync(DropFiles)
-    }
+    const {sendFiles, isLoading} = useUploadResource()
 
     const openDialog = () => {
         if (dropzoneRef.current) {
@@ -65,8 +51,7 @@ const Resource: React.FC<ResourceProps> = observer(({}) => {
                                     <motion.button
                                         whileTap={{scale: 0.95}}
                                         type="button"
-                                        onClick={openDialog}
-                                    >
+                                        onClick={openDialog}>
                                         Загрузить
                                     </motion.button>
                                 </div>
@@ -90,7 +75,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
     const [list, setList] = React.useState<number>(1);
 
     const loader = ({src}: any) => {
-        return "http://localhost/Watermark_backend/"+src;
+        return "http://localhost/Watermark_backend/" + src;
     }
 
     const activeBtn = {
@@ -124,13 +109,8 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
                 </div>
             </div>
             <div className={style.grid}>
-                {
-                    isLoading && <div className={style.loader}>
-                        <motion.div animate={{margin: 0, transition: {duration: 0.5}}} className={style.logo_loader}>
-                            <Image src={`/chubrik_loader.gif`} width={100} height={100}/>
-                        </motion.div>
-                    </div>
-                }
+                <NoFiles isShow={resource.list.length < 1} isDragActive={isDragActive}/>
+                <Loader isLoading={isLoading}/>
                 {
                     resource.list.slice((list - 1) * 4, list * 4).map((item, index) => {
                         return <Image
@@ -148,5 +128,54 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
         </>
     )
 });
+
+interface NoFilesProps {
+    isDragActive: boolean,
+    isShow: boolean,
+}
+
+const NoFiles: React.FC<NoFilesProps> = ({isDragActive, isShow}) => {
+
+    const transition = {duration: 4, yoyo: Infinity, ease: "easeInOut"}
+
+    return (
+        <>
+            {isShow && <div className={style.no_files}>
+                <motion.svg animate={{scale: isDragActive ? 1.1 : 1}} xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M9 17.75C8.9 17.75 8.81 17.73 8.71 17.69C8.43 17.58 8.25 17.3 8.25 17V11C8.25 10.59 8.59 10.25 9 10.25C9.41 10.25 9.75 10.59 9.75 11V15.19L10.47 14.47C10.76 14.18 11.24 14.18 11.53 14.47C11.82 14.76 11.82 15.24 11.53 15.53L9.53 17.53C9.39 17.67 9.19 17.75 9 17.75Z"/>
+                    <path
+                        d="M8.99945 17.7514C8.80945 17.7514 8.61945 17.6814 8.46945 17.5314L6.46945 15.5314C6.17945 15.2414 6.17945 14.7614 6.46945 14.4714C6.75945 14.1814 7.23945 14.1814 7.52945 14.4714L9.52945 16.4714C9.81945 16.7614 9.81945 17.2414 9.52945 17.5314C9.37945 17.6814 9.18945 17.7514 8.99945 17.7514Z"/>
+                    <path
+                        d="M15 22.75H9C3.57 22.75 1.25 20.43 1.25 15V9C1.25 3.57 3.57 1.25 9 1.25H14C14.41 1.25 14.75 1.59 14.75 2C14.75 2.41 14.41 2.75 14 2.75H9C4.39 2.75 2.75 4.39 2.75 9V15C2.75 19.61 4.39 21.25 9 21.25H15C19.61 21.25 21.25 19.61 21.25 15V10C21.25 9.59 21.59 9.25 22 9.25C22.41 9.25 22.75 9.59 22.75 10V15C22.75 20.43 20.43 22.75 15 22.75Z"/>
+                    <path
+                        d="M22 10.7485H18C14.58 10.7485 13.25 9.41852 13.25 5.99852V1.99852C13.25 1.69852 13.43 1.41852 13.71 1.30852C13.99 1.18852 14.31 1.25852 14.53 1.46852L22.53 9.46852C22.74 9.67852 22.81 10.0085 22.69 10.2885C22.57 10.5685 22.3 10.7485 22 10.7485ZM14.75 3.80852V5.99852C14.75 8.57852 15.42 9.24852 18 9.24852H20.19L14.75 3.80852Z"/>
+                </motion.svg>
+                <div className={style.header}>
+                    {isDragActive ? "Отпустите для загрузки" : "Изображения отсутсвуют"}
+                </div>
+            </div>}
+        </>
+    )
+}
+
+interface LodaderProps {
+    isLoading: boolean
+}
+
+const Loader: React.FC<LodaderProps> = ({isLoading}) => {
+    return (
+        <>
+            {
+                isLoading && <div className={style.loader}>
+                    <motion.div animate={{margin: 0, transition: {duration: 0.5}}} className={style.logo_loader}>
+                        <Image src={`/chubrik_loader.gif`} width={100} height={100}/>
+                    </motion.div>
+                </div>
+            }
+        </>
+    )
+}
 
 export default Resource
