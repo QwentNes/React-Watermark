@@ -25,7 +25,10 @@ export class watermarks {
             id: this.index++,
             initial: {
                 link: data.link,
-                size: data.size
+                size: {
+                    width: data.size.width,
+                    height: data.size.height
+                }
             },
             current: {
                 mode: 'normal',
@@ -34,7 +37,10 @@ export class watermarks {
                     top: 0,
                     left: 0,
                 },
-                size: data.size,
+                size: {
+                    width: data.size.width,
+                    height: data.size.height
+                },
                 zIndex: 1,
             }
         }
@@ -42,43 +48,39 @@ export class watermarks {
     }
 
     public find = (id: number): ProxyElement | undefined => {
-        let result: ProxyElement | undefined;
-
-        this.list.map(item => {
-            if (item.id == id) {
-                result = item;
-            }
-        })
+        let result: ProxyElement | undefined = this.list.filter(element => {
+            element.id == id
+        })[0];
 
         return result;
     }
 
     public setParam = (id: number, param: string, value: any): void => {
-
-        const item = this.list.filter(element => element.id == id)[0].current; // оптимизировать код
-
-        switch (param) {
-            case POSITION_TOP:
-                item.position.top = value
-                break;
-            case POSITION_LEFT:
-                item.position.left = value
-                break;
-            case SIZE_WIDTH:
-                item.size.width = value
-                break;
-            case SIZE_HEIGHT:
-                item.size.height = value
-                break;
-            case MODE:
-                item.mode = value
-                break;
-            case OPACITY:
-                item.opacity = value
-                break;
-            case ZINDEX:
-                item.zIndex = value
-                break;
+        const item = this.find(id)?.current;
+        if(typeof item != 'undefined'){
+            switch (param) {
+                case POSITION_TOP:
+                    item.position.top = value
+                    break;
+                case POSITION_LEFT:
+                    item.position.left = value
+                    break;
+                case SIZE_WIDTH:
+                    item.size.width = value
+                    break;
+                case SIZE_HEIGHT:
+                    item.size.height = value
+                    break;
+                case MODE:
+                    item.mode = value
+                    break;
+                case OPACITY:
+                    item.opacity = value
+                    break;
+                case ZINDEX:
+                    item.zIndex = value
+                    break;
+            }
         }
     }
 

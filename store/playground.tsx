@@ -5,13 +5,13 @@ import {TPlayground} from "../types/main";
 export class playground {
 
     public config: TPlayground = {
-        link: "https://images.pexels.com/photos/11653295/pexels-photo-11653295.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        link: "https://images.pexels.com/photos/8640688/pexels-photo-8640688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         size: {
-            width: 750,
-            height: 1250,
+            width: 2000,
+            height: 2000,
         },
         scale: 0.65,
-        edit: -1,
+            edit: -1,
     }
 
     constructor() {
@@ -19,7 +19,7 @@ export class playground {
     }
 
     public setScale = (value: number): void => {
-        this.config.scale = value
+        this.config.scale = Number(value.toFixed(2))
     }
 
     public setEdit = (value: number): void => {

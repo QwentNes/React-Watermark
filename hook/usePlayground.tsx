@@ -4,7 +4,7 @@ import { TargetAndTransition } from 'framer-motion';
 import { TMousePosition } from '../types/main';
 import { useDimensions } from './useDimensions';
 
-export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, position: TMousePosition,) {
+export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, position: TMousePosition) {
     const {playground} = useStores()
 
     const data = playground.config;

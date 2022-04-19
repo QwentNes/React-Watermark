@@ -16,7 +16,7 @@ interface ResourceProps {
 
 }
 
-const Resource: React.FC<ResourceProps> = observer(({}) => {
+const Resource: React.FC<ResourceProps> = ({}) => {
     const dropzoneRef = createRef() as React.RefObject<any>
     const {sendFiles, isLoading} = useUploadResource()
 
@@ -62,7 +62,7 @@ const Resource: React.FC<ResourceProps> = observer(({}) => {
             </Dropzone>
         </>
     );
-});
+};
 
 
 interface GridProps {
@@ -79,7 +79,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
     }
 
     const activeBtn = {
-        right: resource.list.length / 4 > list,
+        right: resource.elements.length / 4 > list,
         left: list != 1,
     }
 
@@ -109,10 +109,10 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
                 </div>
             </div>
             <div className={style.grid}>
-                <NoFiles isShow={resource.list.length < 1} isDragActive={isDragActive}/>
+                <NoFiles isShow={resource.elements.length < 1} isDragActive={isDragActive}/>
                 <Loader isLoading={isLoading}/>
                 {
-                    resource.list.slice((list - 1) * 4, list * 4).map((item, index) => {
+                    resource.elements.slice((list - 1) * 4, list * 4).map((item, index) => {
                         return <Image
                             onClick={() => watermarks.push(item)}
                             loader={loader}
@@ -176,4 +176,4 @@ const Loader: React.FC<LodaderProps> = ({isLoading}) => {
     )
 }
 
-export default Resource
+export default observer(Resource)

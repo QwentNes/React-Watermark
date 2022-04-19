@@ -10,30 +10,29 @@ interface EditorProps {
 }
 
 const Editor: React.FC<EditorProps> = observer(({position}) => {
-    const {isEnable, elementStyle, editorRef, eventsCallback, StopSizer} = useEditor(position)
+    const {elementStyle, editorRef, eventsCallback, StopSizer} = useEditor(position)
 
     return (
-        isEnable ?
-            <>
-                <div
-                    ref={editorRef}
-                    style={elementStyle}
-                    className={style.resizer}>
-                    <div className={style.center} onMouseUp={eventsCallback.DragUp}>
-                        <div className={style.drag_moving} onMouseDown={eventsCallback.DragDown} />
-                    </div>
-                    <div className={style.vertical} onMouseUp={eventsCallback.reWidthUp}>
-                        <div className={style.resize_width} onMouseDown={eventsCallback.reWidthDown}/>
-                    </div>
-                    <div className={style.turned} onMouseUp={eventsCallback.TurnedUp}>
-                        <div className={style.resize_multi} onMouseDown={eventsCallback.TurnedDown}/>
-                    </div>
-                    <div className={style.horizontal} onMouseUp={eventsCallback.reHeightUp}>
-                        <div className={style.resize_height} onMouseDown={eventsCallback.reHeightDown}/>
-                    </div>
+        <>
+            <div
+                ref={editorRef}
+                style={elementStyle}
+                className={style.resizer}>
+                <div className={style.center} onMouseUp={eventsCallback.DragUp}>
+                    <div className={style.drag_moving} onMouseDown={eventsCallback.DragDown}/>
                 </div>
-                <StopSizer/>
-            </> : null
+                <div className={style.vertical} onMouseUp={eventsCallback.reWidthUp}>
+                    <div className={style.resize_width} onMouseDown={eventsCallback.reWidthDown}/>
+                </div>
+                <div className={style.turned} onMouseUp={eventsCallback.TurnedUp}>
+                    <div className={style.resize_multi} onMouseDown={eventsCallback.TurnedDown}/>
+                </div>
+                <div className={style.horizontal} onMouseUp={eventsCallback.reHeightUp}>
+                    <div className={style.resize_height} onMouseDown={eventsCallback.reHeightDown}/>
+                </div>
+            </div>
+            <StopSizer/>
+        </>
     );
 });
 

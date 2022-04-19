@@ -6,8 +6,9 @@ import {Instruments} from "../resources/Instruments";
 import Parameters from "../components/Parameters";
 import Workspace from "../components/Workspace";
 import Resource from "../components/Resource";
+import {observer} from "mobx-react-lite"
 
-const Home: NextPage = () => {
+const Home: NextPage = observer(() => {
     return (
         <MainLayout>
             <InstrumentsBar data={Instruments} />
@@ -18,6 +19,6 @@ const Home: NextPage = () => {
             </div>
         </MainLayout>
     )
-}
+})
 
 export default Home

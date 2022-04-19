@@ -117,8 +117,6 @@ export function useEditor(position: TMousePosition) {
         left: element?.position.left,
     }
 
-    const isEnable: boolean = typeof element != 'undefined';
-
     const StopSizer = useCallback(
         () => {
             return (
@@ -136,6 +134,6 @@ export function useEditor(position: TMousePosition) {
             )
         }, [])
 
-    return {isEnable, elementStyle, editorRef, eventsCallback, StopSizer}
+    return {elementStyle, editorRef, eventsCallback, StopSizer}
 
 }

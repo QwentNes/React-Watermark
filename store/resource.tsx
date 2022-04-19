@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 export class resource {
     private index: number =  1;
-    public list: Array<TResource> = []
+    public elements: Array<TResource> = []
 
     constructor() {
         makeAutoObservable(this, {}, {deep: true})
@@ -13,7 +13,7 @@ export class resource {
 
     public push = (data: Array<TResponse>) => {
         data.map(item => {
-            this.list.push({
+            this.elements.push({
                 id: this.index,
                 ...item,
             })
