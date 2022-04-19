@@ -70,3 +70,9 @@ export type TPlayground = {
     scale: number,
     edit: number
 }
+
+export type TConfigLoader = {
+    width: number,
+    height: number,
+    quality: number
+}

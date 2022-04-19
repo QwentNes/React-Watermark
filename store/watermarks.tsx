@@ -48,16 +48,20 @@ export class watermarks {
     }
 
     public find = (id: number): ProxyElement | undefined => {
-        let result: ProxyElement | undefined = this.list.filter(element => {
-            element.id == id
-        })[0];
+        let result: ProxyElement | undefined;
+
+        this.list.map(item => {
+            if (item.id == id) {
+                result = item;
+            }
+        })
 
         return result;
     }
 
     public setParam = (id: number, param: string, value: any): void => {
         const item = this.find(id)?.current;
-        if(typeof item != 'undefined'){
+        if (typeof item != 'undefined') {
             switch (param) {
                 case POSITION_TOP:
                     item.position.top = value
