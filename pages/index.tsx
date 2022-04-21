@@ -6,9 +6,12 @@ import {Instruments} from "../resources/Instruments";
 import Parameters from "../components/Parameters";
 import Workspace from "../components/Workspace";
 import Resource from "../components/Resource";
-import {observer} from "mobx-react-lite"
+import {observer} from "mobx-react-lite";
+import { usePrimaryModal } from '../hook/usePrimaryModal';
 
 const Home: NextPage = observer(() => {
+    const {Modal} = usePrimaryModal()
+
     return (
         <MainLayout>
             <InstrumentsBar data={Instruments} />
@@ -17,6 +20,7 @@ const Home: NextPage = observer(() => {
                 <Resource/>
                 <Parameters/>
             </div>
+            <Modal />
         </MainLayout>
     )
 })

@@ -65,6 +65,7 @@ export type TMousePosition = {
 }
 
 export type TPlayground = {
+    project: string,
     link: string,
     size: TSizeElement,
     scale: number,
@@ -75,4 +76,9 @@ export type TConfigLoader = {
     width: number,
     height: number,
     quality: number
+}
+
+export type TImageWorkspace = {
+    link: string,
+    size: TSizeElement
 }

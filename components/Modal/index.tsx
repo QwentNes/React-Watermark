@@ -58,7 +58,7 @@ const HeaderBlock: React.FC = ({children}) => {
 const Title: React.FC = ({children}) => {
     return(
         <div className={style.title}>
-            {children}
+           {children}
         </div>
     )
 }

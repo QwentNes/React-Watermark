@@ -71,7 +71,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
     const [list, setList] = React.useState<number>(1);
 
     const loader = ({src}: any) => {
-        return "http://localhost/Watermark_backend/" + src;
+        return "http://localhost/Watermark_backend" + src;
     }
 
     const activeBtn = {
@@ -115,6 +115,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
                             width={120}
                             height={100}
                             objectFit={`cover`}
+                            objectPosition={`top`}
                         />
                     })
                 }

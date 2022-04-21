@@ -1,6 +1,7 @@
 import * as React from 'react';
 import style from '../styles/MainLayout.module.scss';
 import { Toaster } from 'react-hot-toast';
+import StartModal from '../components/PrimaryModal'
 
 interface LayoutProps {
 

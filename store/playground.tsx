@@ -1,17 +1,18 @@
 import React from 'react'
 import {makeAutoObservable} from "mobx";
-import {TPlayground} from "../types/main";
+import {TImageWorkspace, TPlayground} from "../types/main";
 
 export class playground {
-
+    public primaryModal: boolean = true
     public config: TPlayground = {
-        link: "https://images.pexels.com/photos/8640688/pexels-photo-8640688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        project: "",
+        link: "",
         size: {
-            width: 2000,
-            height: 2000,
+            width: 0,
+            height: 0,
         },
         scale: 0.65,
-            edit: -1,
+        edit: -1,
     }
 
     constructor() {
@@ -24,5 +25,29 @@ export class playground {
 
     public setEdit = (value: number): void => {
         this.config.edit = value
+    }
+
+    public setWorkspace = (data: TImageWorkspace): void => {
+        this.config = {
+            ...this.config,
+            link: data.link,
+            size: data.size,
+        }
+    }
+
+    public clear = (): void => {
+        this.config = {
+            ...this.config,
+            link: "",
+            size: {
+                width: 0,
+                height: 0,
+            },
+            edit: -1,
+        }
+    }
+
+    public togglePrimaryModal(){
+        this.primaryModal = !this.primaryModal
     }
 }

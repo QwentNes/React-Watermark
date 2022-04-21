@@ -18,6 +18,7 @@ export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, positio
     const dimensions = useDimensions(innerRef, [sizer])
 
     React.useEffect(() => {
+        const scrollRef = scrollBlockRef.current
         const Resizer = (e: React.WheelEvent): void => {
             if (e.ctrlKey || e.altKey) {
                 e.preventDefault()
@@ -42,9 +43,9 @@ export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, positio
             }
         }
 
-        scrollBlockRef.current.addEventListener("wheel", Resizer)
+        scrollRef.addEventListener("wheel", Resizer)
 
-        return () => scrollBlockRef.current.removeEventListener("wheel", Resizer)
+        return () => scrollRef.removeEventListener("wheel", Resizer)
     }, [sizer])
 
     const playgroundSize:React.CSSProperties = {

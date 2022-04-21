@@ -9,7 +9,7 @@ export function useUploadResource() {
 
     const {mutateAsync, isLoading} = useMutation('uploadRes', (data: FormData) => UploadResource.All(data), {
         onSuccess: (response) => {
-            resource.push(JSON.parse(JSON.stringify(response.data)));
+            resource.push(JSON.parse(JSON.stringify(response.data))); //try
         },
         onError: (error) => {
             toast.error("Произошла ошибка")

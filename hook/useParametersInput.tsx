@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion'
-import React, {useCallback} from 'react'
+import React from 'react'
 import {Select, Size, Slider} from '../components/Inputs'
 import {useStores} from './useStores'
 

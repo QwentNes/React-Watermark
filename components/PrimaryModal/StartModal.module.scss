@@ -48,6 +48,10 @@
   gap: 12px;
   user-select: none;
 
+  &.drop_active{
+    border: 2px solid $button_background;
+  }
+
   span {
     font-size: 0.85em;
     color: $white_color;
@@ -66,6 +70,26 @@
 
     path {
       fill: $white_color;
+    }
+  }
+}
+
+.close{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $blocks_background;
+  border-radius: 0.3em;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+
+  svg{
+    width: 10px;
+    height: 10px;
+
+    path{
+      fill: $color_normal_icon;
     }
   }
 }

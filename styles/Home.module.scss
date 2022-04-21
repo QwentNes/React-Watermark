@@ -1,4 +1,7 @@
+@import "globals.scss";
+
 .side {
+  @include scrollbars(0px, gray);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -6,4 +9,6 @@
   width: 310px;
   position: relative;
   gap: 1.9em;
+  height: 100%;
+  overflow-y: auto;
 }
