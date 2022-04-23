@@ -7,10 +7,10 @@ import Parameters from "../components/Parameters";
 import Workspace from "../components/Workspace";
 import Resource from "../components/Resource";
 import {observer} from "mobx-react-lite";
-import { usePrimaryModal } from '../hook/usePrimaryModal';
+import { useModal } from '../hook/useModal';
 
 const Home: NextPage = observer(() => {
-    const {Modal} = usePrimaryModal()
+    const {Primary, Download} = useModal()
 
     return (
         <MainLayout>
@@ -20,7 +20,8 @@ const Home: NextPage = observer(() => {
                 <Resource/>
                 <Parameters/>
             </div>
-            <Modal />
+            <Primary />  {/*общий блок модал*/}
+            <Download />
         </MainLayout>
     )
 })

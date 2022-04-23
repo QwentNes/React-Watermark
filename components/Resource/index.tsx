@@ -111,7 +111,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
                             onClick={() => watermarks.push(item)}
                             loader={loader}
                             src={item.link}
-                            key={index}
+                            key={`res_image`+index}
                             width={120}
                             height={100}
                             objectFit={`cover`}

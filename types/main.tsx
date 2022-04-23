@@ -1,13 +1,14 @@
 import * as React from 'react';
+import {string} from "prop-types";
 
 type TStateScale = {
     value: number,
-    set: ( v : number ) => void
+    set: (v: number) => void
 }
 
 type TStateEdit = {
     value: number | null,
-    set: ( v : number | null ) => void
+    set: (v: number | null) => void
 }
 
 type TPositionElement = {
@@ -79,6 +80,32 @@ export type TConfigLoader = {
 }
 
 export type TImageWorkspace = {
+    name: string,
     link: string,
     size: TSizeElement
+}
+
+export type StringKeys = {
+    [key: string]: any;
+}
+
+export type TProject = {
+    name: string,
+    image: string,
+    size: TSizeElement,
+}
+
+export type TLayer = {
+    id: number,
+    mode: string,
+    image: string,
+    opacity: number,
+    size: TSizeElement,
+    position: TPositionElement,
+    zIndex: number
+}
+
+export type TProcessImage = {
+    project: TProject,
+    layers: Array<TLayer>
 }

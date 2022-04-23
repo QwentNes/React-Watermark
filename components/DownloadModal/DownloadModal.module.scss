@@ -1,47 +1,35 @@
 @import "./styles/globals.scss";
 
-.item_download{
-  cursor: pointer;
+.btn_group{
   width: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 18px;
-  border: 2px solid $button_background;
-  padding: 0.8em 1em;
-  border-radius: 0.65em;
-  box-sizing: border-box;
-  user-select: none;
+  justify-content: flex-end;
+  gap: 0.8em;
 
-  .doc_info{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  button{
+    height: 35px;
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border: none;
+    font-family: Inter, sans-serif;
+    font-size: 0.85em;
+    padding: 0 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: 500;
 
-    .name{
-      opacity: .9;
-      font-size: 0.875em;
-      font-family: Inter, sans-serif;
-      color: $white_color;
-      font-weight: 500;
+    &.cancel{
+      background: transparent;
+      border: 2px solid $button_background;
+      color: $color_normal_icon;
     }
-    .size{
-      opacity: .575;
-      font-size: 0.65em;
-      font-family: Inter, sans-serif;
+
+    &.apply{
+      background: $color_active_icon;
       color: $white_color;
-      font-weight: 400;
-    }
-  }
-
-  svg{
-    width: 32px;
-    height: 32px;
-
-    path{
-      opacity: .9;
-      fill: $white_color;
     }
   }
 }

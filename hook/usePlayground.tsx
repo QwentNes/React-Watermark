@@ -1,11 +1,39 @@
 import React from 'react';
 import { useStores } from './useStores';
 import { TargetAndTransition } from 'framer-motion';
-import { TMousePosition } from '../types/main';
+import {TImageWorkspace, TMousePosition} from '../types/main';
 import { useDimensions } from './useDimensions';
+import {useMutation} from "react-query";
+import {UploadResource} from "../service/uploadResource";
+import toast from "react-hot-toast";
 
-export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, position: TMousePosition) {
+export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, position: TMousePosition) {
     const {playground} = useStores()
+    const {mutateAsync, isLoading} = useMutation('createProject', (data: FormData) => UploadResource.Project(data), {
+        onSuccess: ({data}) => {
+            try{
+                let projectParse:TImageWorkspace = JSON.parse(JSON.stringify(data))
+                playground.setWorkspace(projectParse)
+            }
+            catch {
+                toast.error("Произошла ошибка")
+            }
+        },
+        onError: () => {
+            toast.error("Не удалось инициализировать проект")
+        },
+    })
+    React.useEffect(() => {
+        if(playground.tempData != null){
+            playground.clear()
+            sendProject(playground.tempData).then()
+            playground.clearTempData()
+        }
+    }, [playground.tempData])
+
+    const sendProject = async (project: FormData) => {
+        await mutateAsync(project)
+    }
 
     const data = playground.config;
     const scale = data.scale;
@@ -15,6 +43,7 @@ export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, positio
         width: data.size.width * scale,
         height: data.size.height * scale,
     })
+
     const dimensions = useDimensions(innerRef, [sizer])
 
     React.useEffect(() => {
@@ -68,6 +97,7 @@ export function usePlaygorund(innerRef: React.RefObject<HTMLDivElement>, positio
         width: data.size.width,
         height: data.size.height
     }
-    // :D алло, это жоско ?
-    return {scrollBlockRef, playgroundSize, playgroundAnimate, image}
+    // :D жоско
+
+    return {scrollBlockRef, playgroundSize, playgroundAnimate, image, isLoading}
 }

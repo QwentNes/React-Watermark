@@ -2,11 +2,7 @@ import * as React from 'react';
 import style from "./Watermark.module.scss";
 import {observer} from "mobx-react-lite";
 import {useStores} from "../../hook/useStores";
-import classNames from "classnames";
-
-type StringKeys = {
-    [key: string]: string;
-}
+import {StringKeys} from "../../types/main";
 
 interface MarkProps {
     id: number;

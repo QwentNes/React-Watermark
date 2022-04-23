@@ -3,7 +3,9 @@ import {makeAutoObservable} from "mobx";
 import {TImageWorkspace, TPlayground} from "../types/main";
 
 export class playground {
-    public primaryModal: boolean = true
+    public primaryModal: boolean = false
+    public downloadModal: boolean = false
+
     public config: TPlayground = {
         project: "",
         link: "",
@@ -14,6 +16,7 @@ export class playground {
         scale: 0.65,
         edit: -1,
     }
+    public tempData: FormData | null = null
 
     constructor() {
         makeAutoObservable(this, {}, {deep: true})
@@ -27,9 +30,22 @@ export class playground {
         this.config.edit = value
     }
 
+    public clearTempData = () => {
+        this.tempData = null
+    }
+
+    public togglePrimaryModal(){
+        this.primaryModal = !this.primaryModal
+    }
+
+    public toggleDownloadModal(){
+        this.downloadModal = !this.downloadModal
+    }
+
     public setWorkspace = (data: TImageWorkspace): void => {
         this.config = {
             ...this.config,
+            project: data.name,
             link: data.link,
             size: data.size,
         }
@@ -47,7 +63,9 @@ export class playground {
         }
     }
 
-    public togglePrimaryModal(){
-        this.primaryModal = !this.primaryModal
+    public send = (data: FormData) => {
+        this.clear()
+        this.togglePrimaryModal()
+        this.tempData = data
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {makeAutoObservable} from "mobx";
 import {ProxyElement, TResource} from "../types/main";
+import toast from 'react-hot-toast';
 
 const POSITION_TOP = "position_top"
 const POSITION_LEFT = "position_left"
@@ -43,6 +44,12 @@ export class watermarks {
                 },
                 zIndex: 1,
             }
+        }
+        if(this.list.length > 20){
+            toast('На рабочей области более 20 изображений. Это может снизить производительность вашего устройства', {
+                duration: 6000,
+                icon: '👀',
+            });
         }
         this.list.push(newElement)
     }

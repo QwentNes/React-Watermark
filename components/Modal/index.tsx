@@ -4,17 +4,20 @@ import {motion} from "framer-motion";
 
 interface ModalProps {
     show: boolean,
+    size: number,
 }
 
-const Modal: React.FC<ModalProps> = ({children, show}) => {
+const Modal: React.FC<ModalProps> = ({children, show, size}) => {
     const wrapAnim = {
         show: {
             display: 'flex',
+            transition: {
+                delayChildren: 0.5,
+            }
         },
         hidden: {
-            delay: 1,
             transitionEnd: {
-                display: 'none'
+                display: 'none',
             }
         }
     }
@@ -40,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({children, show}) => {
 
     return (
         <motion.div initial={false} className={style.modal_wrap} animate={show ? 'show' : 'hidden'} variants={wrapAnim}>
-            <motion.div className={style.modal} animate={show ? 'show' : 'hidden'} variants={modalAnim}>
+            <motion.div className={style.modal} style={{width: size+`em`}} animate={show ? 'show' : 'hidden'} variants={modalAnim}>
                 {children}
             </motion.div>
         </motion.div>

@@ -3,17 +3,24 @@ import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { UploadResource } from '../service/uploadResource';
 import { useStores } from './useStores';
+import {TResponse} from "../types/main";
 
 export function useUploadResource() {
     const {resource} = useStores()
 
     const {mutateAsync, isLoading} = useMutation('uploadRes', (data: FormData) => UploadResource.All(data), {
-        onSuccess: (response) => {
-            resource.push(JSON.parse(JSON.stringify(response.data))); //try
+        onSuccess: ({data}) => {
+            try{
+                let resourceParse:Array<TResponse> = JSON.parse(JSON.stringify(data))
+                resource.push(resourceParse)
+            }
+            catch {
+                toast.error("Произошла ошибка")
+            }
         },
-        onError: (error) => {
+        onError: () => {
             toast.error("Произошла ошибка")
-        }
+        },
     })
 
     const sendFiles = async (acceptedFiles: Array<File>) => {
@@ -25,7 +32,8 @@ export function useUploadResource() {
             })
 
             await mutateAsync(DropFiles)
-        } else {
+        }
+        else {
             toast.error("Превышено ограничение загрузки")
         }
     }

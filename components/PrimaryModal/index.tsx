@@ -1,23 +1,22 @@
-import * as React from 'react';
+import React, {createRef} from 'react';
 import style from './StartModal.module.scss'
 import {Modal, HeaderBlock, Title, Prefix, Warning, Content} from "../Modal/";
 import {motion} from 'framer-motion';
 import Dropzone from "react-dropzone";
-import {createRef} from "react";
 import classNames from "classnames";
-
+import { observer } from 'mobx-react-lite';
+import {useCreateProject} from "../../hook/useCreateProject";
 
 interface ModalProps {
     show: boolean,
     close: () => void
 }
 
-const PrimaryModal: React.FC<ModalProps> = ({show, close}) => {
-    const [file, setFile] = React.useState<FormData | null>(null);
-    const [name, setName] = React.useState<string>("");
+const PrimaryModal: React.FC<ModalProps> = observer(({show, close}) => {
+    const {events, name} = useCreateProject()
 
     return (
-        <Modal show={show}>
+        <Modal size={31.5} show={show}>
             <HeaderBlock>
                 <Title>
                     <span>Создание проекта</span>
@@ -31,26 +30,26 @@ const PrimaryModal: React.FC<ModalProps> = ({show, close}) => {
                     </motion.div>
                 </Title>
                 <Prefix>
-                    Для начала создания необходимо указать название проекта и загрузить медиафайл
+                    Для начала создания необходимо указать название проекта и загрузить изображение
                 </Prefix>
             </HeaderBlock>
             <Content>
                 <div className={style.input_group}>
-                    <input type={`text`} placeholder={`Название проекта`}/>
-                    <input type={`submit`} value={`Продолжить`}/>
+                    <input type={`text`} value={name} onChange={events.onChangeName} placeholder={`Название проекта`}/>
+                    <input type={`submit`} value={`Продолжить`} onClick={events.onClickCreate}/>
                 </div>
-                <PrimaryUploader UploadFiles={(value: FormData) => setFile(value)}  />
+                <PrimaryUploader UploadFiles={events.onChangeFile}  />
                 <Warning />
             </Content>
         </Modal>
     );
-};
+});
 
 interface UploaderProps{
     UploadFiles: (value: any) => void;
 }
 
-const PrimaryUploader: React.FC<UploaderProps> = ({UploadFiles}) => {
+const PrimaryUploader: React.FC<UploaderProps> = observer(({UploadFiles}) => {
     const dropzoneRef = createRef() as React.RefObject<any>
 
     const openDialog = () => {
@@ -61,20 +60,32 @@ const PrimaryUploader: React.FC<UploaderProps> = ({UploadFiles}) => {
 
     const prepareFile = (files: Array<File>) => {
         if(files.length == 1){
-            let data = new FormData()
-            data.append("Workspace_image", files[0]);
-            UploadFiles(data)
+            let ProjectImage = new FormData()
+            ProjectImage.append(`Workspace_image`, files[0]);
+            UploadFiles(ProjectImage)
         }
+    }
+
+    const fileDisplayState = (files: Array<File>, isDrag: boolean) => {
+        if(isDrag){
+            return <span>Отпустите для загрузки</span>
+        }
+        if(files.length == 1){
+            return <span>{files[0].name} <a style={{marginLeft: "0.35em"}} onClick={openDialog}>изменить</a></span>
+        }
+
+        return <span>Перетащите изображение или <a onClick={openDialog}>выберите файл</a></span>
     }
 
     return (
         <Dropzone
             ref={dropzoneRef}
-            noClick noKeyboard
+            noClick
+            noKeyboard
             accept={"image/jpeg,image/png"}
             onDrop={acceptedFiles => prepareFile(acceptedFiles)}
         >
-            {({getRootProps, getInputProps, isDragActive}) => {
+            {({getRootProps, getInputProps, isDragActive, acceptedFiles}) => {
                 return (
                     <div {...getRootProps({className: classNames(style.drop_file, isDragActive && style.drop_active)})}>
                         <input {...getInputProps()} />
@@ -83,14 +94,12 @@ const PrimaryUploader: React.FC<UploaderProps> = ({UploadFiles}) => {
                             <path d="M15 22.75H9C3.57 22.75 1.25 20.43 1.25 15V9C1.25 3.57 3.57 1.25 9 1.25H14C14.41 1.25 14.75 1.59 14.75 2C14.75 2.41 14.41 2.75 14 2.75H9C4.39 2.75 2.75 4.39 2.75 9V15C2.75 19.61 4.39 21.25 9 21.25H15C19.61 21.25 21.25 19.61 21.25 15V10C21.25 9.59 21.59 9.25 22 9.25C22.41 9.25 22.75 9.59 22.75 10V15C22.75 20.43 20.43 22.75 15 22.75Z"/>
                             <path d="M22 10.7485H18C14.58 10.7485 13.25 9.41852 13.25 5.99852V1.99852C13.25 1.69852 13.43 1.41852 13.71 1.30852C13.99 1.18852 14.31 1.25852 14.53 1.46852L22.53 9.46852C22.74 9.67852 22.81 10.0085 22.69 10.2885C22.57 10.5685 22.3 10.7485 22 10.7485ZM14.75 3.80852V5.99852C14.75 8.57852 15.42 9.24852 18 9.24852H20.19L14.75 3.80852Z"/>
                         </motion.svg>
-                        {
-                            isDragActive ? <span>Отпустите для загрузки</span> : <span>Перетащите медиафайл или <a onClick={openDialog}>выберите файл</a></span>
-                        }
+                        {fileDisplayState(acceptedFiles, isDragActive)}
                     </div>
                 );
             }}
         </Dropzone>
     )
-}
+})
 
 export default PrimaryModal
