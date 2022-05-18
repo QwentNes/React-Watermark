@@ -3,7 +3,7 @@
   "author": "Qwent",
   "keywords": ["watermark", "image", "sign", "protect", "autor marker"],
   "description": "Watermark overlay app",
-  "version": "0.5.0",
+  "version": "1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",

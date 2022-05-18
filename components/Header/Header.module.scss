@@ -1,0 +1,89 @@
+@import "./styles/globals.scss";
+
+.header{
+  background: $black_background;
+  border-bottom: 3px solid $gray_background;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 1.2em 1.9em 0.8em 1.9em;
+  user-select: none;
+
+  .version{
+    span{
+        font-size: 0.8em;
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+        color: $color_normal_icon
+    }
+  }
+
+  .logo{
+    span{
+        font-size: 1.2em;
+        font-family: 'Fugaz One', cursive;
+        color: $white_color;
+    }
+    .domen{
+        color: $color_active_icon
+    }
+  }
+
+  .toggle_theme{
+    .toggler{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        background: $blocks_background;
+        height: 32px;
+        width: 94px;
+        border-radius: 1.5em;
+        box-sizing: border-box;
+        position: relative;
+        gap: 3px;
+
+        svg{
+            display: flex;
+            fill: none;
+            width: 16px;
+            height: 16px;
+            z-index: 3;
+        }
+
+        .dark, .light{
+            cursor: pointer;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .dark{
+            left: 0;
+            margin-left: 0.85em;
+        }
+
+        .light{
+            right: 0;
+            margin-right: 0.85em;
+        }
+        
+        .marker_block{
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            box-sizing: border-box;
+            padding: 0px;
+        }
+        .marker{
+            width: 47px;
+            height: 100%;
+            background-color: $button_background;
+            border-radius: 1.5em;
+            z-index: 1;
+        }
+    }
+}
+}

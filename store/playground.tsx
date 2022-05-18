@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 export class playground {
     public primaryModal: boolean = true
     public downloadModal: boolean = false
+    public theme: string = 'dark'
 
     public config: TPlayground = {
         project: "",
@@ -21,6 +22,10 @@ export class playground {
 
     constructor() {
         makeAutoObservable(this, {}, {deep: true})
+    }
+
+    public setTheme = (value: string): void => {
+        this.theme = value;
     }
 
     public setScale = (value: number): void => {
