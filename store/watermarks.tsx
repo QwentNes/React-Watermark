@@ -21,6 +21,10 @@ export class watermarks {
         makeAutoObservable(this, {}, {deep: true})
     }
 
+    public clear = ():void =>{
+        this.list = [];
+    }
+
     public push = (data: TResource): void => {
         let newElement: ProxyElement = {
             id: this.index++,

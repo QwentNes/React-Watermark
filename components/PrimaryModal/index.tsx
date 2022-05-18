@@ -48,6 +48,13 @@ const PrimaryUploader: React.FC<UploaderProps> = observer(({UploadFiles}) => {
         }
     }
 
+    const cutFileName = (name: string) => {
+        if(name.length > 18){
+            return name.slice(0, 18)+'...'
+        }
+        return name
+    }
+
     const prepareFile = (files: Array<File>) => {
         if(files.length == 1){
             let ProjectImage = new FormData()
@@ -61,7 +68,7 @@ const PrimaryUploader: React.FC<UploaderProps> = observer(({UploadFiles}) => {
             return <span>Отпустите для загрузки</span>
         }
         if(files.length == 1){
-            return <span>{files[0].name} <a style={{marginLeft: "0.35em"}} onClick={openDialog}>изменить</a></span>
+            return <span>{cutFileName(files[0].name)} <a style={{marginLeft: "0.35em"}} onClick={openDialog}>изменить</a></span>
         }
 
         return <span>Перетащите изображение или <a onClick={openDialog}>выберите файл</a></span>

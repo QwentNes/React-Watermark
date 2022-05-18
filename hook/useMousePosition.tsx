@@ -11,9 +11,8 @@ type Position = {
 
 export function useMousePosition(ref: React.RefObject<HTMLElement>) {
     const [position, setPosition] = React.useState<Position>({x: 0, y: 0});
-
     const onMouseLeave = React.useCallback<HTMLListener<"mouseleave">>(() => {
-        setPosition({
+        setPosition({ 
             x: 0,
             y: 0
         });

@@ -8,10 +8,14 @@ import Workspace from "../components/Workspace";
 import Resource from "../components/Resource";
 import {observer} from "mobx-react-lite";
 import Modals from '../components/Modal/Modals';
+import Head from 'next/head'
 
 const Home: NextPage = observer(() => {
     return (
         <MainLayout>
+            <Head>
+                <title>Watermarker</title>
+            </Head>
             <InstrumentsBar data={Instruments} />
             <Workspace />
                 <div className={style.side}>

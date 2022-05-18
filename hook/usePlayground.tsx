@@ -8,7 +8,7 @@ import {UploadResource} from "../service/uploadResource";
 import toast from "react-hot-toast";
 
 export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, position: TMousePosition) {
-    const {playground} = useStores()
+    const {playground, watermarks} = useStores()
     const {mutateAsync, isLoading} = useMutation('createProject', (data: FormData) => UploadResource.Project(data), {
         onSuccess: ({data}) => {
             try{
@@ -26,6 +26,7 @@ export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, positio
     React.useEffect(() => {
         if(playground.tempData != null){
             playground.clear()
+            watermarks.clear()
             sendProject(playground.tempData).then()
             playground.clearTempData()
         }
@@ -76,6 +77,13 @@ export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, positio
 
         return () => scrollRef.removeEventListener("wheel", Resizer)
     }, [sizer])
+
+    React.useEffect(() => {
+        setSizer({
+            width: data.size.width * playground.config.scale,
+            height: data.size.height * playground.config.scale,
+        })
+    }, [playground.config.project])
 
     const playgroundSize:React.CSSProperties = {
         width: sizer.width,

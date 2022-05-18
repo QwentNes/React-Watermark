@@ -13,7 +13,6 @@ interface PlaygroundProps {
 
 const Playground: React.FC<PlaygroundProps> = observer(({workSpaceRef, position, children}) => {
     const {scrollBlockRef, playgroundSize, playgroundAnimate, image, isLoading} = usePlayground(workSpaceRef, position)
-
     return (
         <div className={style.content}>
             <div className={style.shell}>
