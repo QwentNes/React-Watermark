@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from "axios";
 import {TProcessImage, TResponse} from "../types/main";
 
-const API_URL = 'http://localhost/Watermark_backend/'
+const API_URL = 'https://api.watermarker.space/'
 
 axios.defaults.baseURL = API_URL
 
@@ -20,7 +20,7 @@ export const UploadResource = {
     },
 
     async Process(data: TProcessImage){
-        return axios.post('/save', data, {
+        return axios.post('project/save', data, {
             headers: {'Content-Type': 'application/json'}
         })
     }

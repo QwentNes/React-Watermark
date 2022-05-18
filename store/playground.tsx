@@ -1,9 +1,10 @@
 import React from 'react'
 import {makeAutoObservable} from "mobx";
 import {TImageWorkspace, TPlayground} from "../types/main";
+import toast from 'react-hot-toast';
 
 export class playground {
-    public primaryModal: boolean = false
+    public primaryModal: boolean = true
     public downloadModal: boolean = false
 
     public config: TPlayground = {
@@ -39,7 +40,11 @@ export class playground {
     }
 
     public toggleDownloadModal(){
-        this.downloadModal = !this.downloadModal
+        if(this.config.project != ""){
+            this.downloadModal = !this.downloadModal;
+            return;
+        }
+        toast.error("Проект не инициализирован");
     }
 
     public setWorkspace = (data: TImageWorkspace): void => {

@@ -1,6 +1,9 @@
 {
-  "name": "watermark",
-  "version": "0.1.0",
+  "name": "watermarker",
+  "author": "Qwent",
+  "keywords": ["watermark", "image", "sign", "protect", "autor marker"],
+  "description": "Watermark overlay app",
+  "version": "0.5.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -32,5 +35,9 @@
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",
     "typescript": "4.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/QwentNes/React-Watermark.git"
   }
 }

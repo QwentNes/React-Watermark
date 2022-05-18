@@ -1,33 +1,23 @@
 import React, {createRef} from 'react';
 import style from './StartModal.module.scss'
-import {Modal, HeaderBlock, Title, Prefix, Warning, Content} from "../Modal/";
+import {Modal, HeaderBlock, Title, Prefix, Warning, Content, CloseBtn} from "../Modal/";
 import {motion} from 'framer-motion';
 import Dropzone from "react-dropzone";
 import classNames from "classnames";
 import { observer } from 'mobx-react-lite';
 import {useCreateProject} from "../../hook/useCreateProject";
+import { useStores } from '../../hook/useStores';
 
-interface ModalProps {
-    show: boolean,
-    close: () => void
-}
-
-const PrimaryModal: React.FC<ModalProps> = observer(({show, close}) => {
+const PrimaryModal: React.FC = observer(({}) => {
+    const {playground} = useStores()
     const {events, name} = useCreateProject()
 
     return (
-        <Modal size={31.5} show={show}>
+        <Modal size={31.5} show={playground.primaryModal} innerKey={`primary`}>
             <HeaderBlock>
                 <Title>
                     <span>Создание проекта</span>
-                    <motion.div
-                        onClick={close}
-                        className={style.close}
-                        whileTap={{scale: 0.95}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-                            <path d="m15.46058,11.88777l7.51869,-7.62738c0.97147,-0.98547 0.97147,-2.58226 0,-3.56774c-0.97143,-0.98547 -2.54547,-0.98547 -3.51686,0l-7.51869,7.62823l-7.51869,-7.62738c-0.97143,-0.98547 -2.54547,-0.98547 -3.5169,0s-0.97143,2.58226 0,3.56774l7.51869,7.62738l-7.51869,7.62738c-0.97143,0.98547 -0.97143,2.58226 0,3.5677c0.97143,0.98551 2.54547,0.98551 3.5169,0l7.51869,-7.62734l7.51869,7.62734c0.97143,0.98551 2.54547,0.98551 3.51686,0c0.97147,-0.98547 0.97147,-2.58226 0,-3.5677l-7.51869,-7.62823z"/>
-                        </svg>
-                    </motion.div>
+                    <CloseBtn click={() => playground.togglePrimaryModal()} />
                 </Title>
                 <Prefix>
                     Для начала создания необходимо указать название проекта и загрузить изображение

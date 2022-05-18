@@ -34,7 +34,7 @@ const Watermark: React.FC<MarkProps> = observer(({id}) => {
                 className={style.watermark}>
                 <img
                     className={presets[config.current.mode]}
-                    src={"http://localhost/Watermark_backend/"+config.initial.link}
+                    src={"https://api.watermarker.space/uploads/"+config.initial.link}
                     alt={`img`}/>
             </div>
             : null

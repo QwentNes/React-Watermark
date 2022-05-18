@@ -1,52 +1,46 @@
 import * as React from 'react';
 import style from "./Modal.module.scss";
-import {motion} from "framer-motion";
+import {motion, AnimatePresence} from "framer-motion";
 
 interface ModalProps {
+    innerKey: string,
     show: boolean,
     size: number,
 }
 
-const Modal: React.FC<ModalProps> = ({children, show, size}) => {
-    const wrapAnim = {
-        show: {
-            display: 'flex',
-            transition: {
-                delayChildren: 0.5,
+const ModalWrap: React.FC<Pick<ModalProps, "show">> = ({children, show}) => {
+    return(
+        <AnimatePresence>
+            {
+                show && <motion.div 
+                            exit={{opacity: 0}} 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className={style.modal_wrap}>
+                    {children}
+                </motion.div>
             }
-        },
-        hidden: {
-            transitionEnd: {
-                display: 'none',
-            }
-        }
-    }
+        </AnimatePresence>
+    
+    )
+}
 
-    const modalAnim = {
-        show: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                stiffness: 145
-            }
-        },
-        hidden: {
-            y: -100,
-            opacity: 0,
-            transition: {
-                type: "spring",
-                stiffness: 150
-            }
-        }
-    }
-
+const Modal: React.FC<ModalProps> = ({children, show, size, innerKey}) => {
     return (
-        <motion.div initial={false} className={style.modal_wrap} animate={show ? 'show' : 'hidden'} variants={wrapAnim}>
-            <motion.div className={style.modal} style={{width: size+`em`}} animate={show ? 'show' : 'hidden'} variants={modalAnim}>
-                {children}
-            </motion.div>
-        </motion.div>
+        <AnimatePresence>
+            {
+                show && <motion.div 
+                            key={innerKey} 
+                            className={style.modal} 
+                            style={{width: size+`em`}}
+                            initial={{ y: '-25px', opacity: 0 }}
+                            animate={{ y: '0', opacity: 1 }}
+                            exit={{ y: '-25px'}}
+                            transition={{type: 'tween'}}>
+                                {children}
+                        </motion.div>
+            }
+        </AnimatePresence>
     );
 };
 
@@ -55,6 +49,23 @@ const HeaderBlock: React.FC = ({children}) => {
         <div className={style.header}>
             {children}
         </div>
+    )
+}
+
+type CloseBtnProps = {
+    click: () => void
+}
+
+const CloseBtn: React.FC<CloseBtnProps> = ({click}) => {
+    return (
+        <motion.div
+            onClick={click}
+            className={style.close}
+            whileTap={{scale: 0.95}}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                <path d="m15.46058,11.88777l7.51869,-7.62738c0.97147,-0.98547 0.97147,-2.58226 0,-3.56774c-0.97143,-0.98547 -2.54547,-0.98547 -3.51686,0l-7.51869,7.62823l-7.51869,-7.62738c-0.97143,-0.98547 -2.54547,-0.98547 -3.5169,0s-0.97143,2.58226 0,3.56774l7.51869,7.62738l-7.51869,7.62738c-0.97143,0.98547 -0.97143,2.58226 0,3.5677c0.97143,0.98551 2.54547,0.98551 3.5169,0l7.51869,-7.62734l7.51869,7.62734c0.97143,0.98551 2.54547,0.98551 3.51686,0c0.97147,-0.98547 0.97147,-2.58226 0,-3.5677l-7.51869,-7.62823z"/>
+            </svg>
+        </motion.div>
     )
 }
 
@@ -104,4 +115,4 @@ const Content: React.FC = ({children}) => {
     )
 }
 
-export {Modal, HeaderBlock, Title, Prefix, Warning, Content}
+export {ModalWrap, Modal, HeaderBlock, Title, CloseBtn, Prefix, Warning, Content}

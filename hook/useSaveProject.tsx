@@ -9,6 +9,10 @@ export function useSaveProject() {
     const {watermarks, playground} = useStores()
     const {mutateAsync, isLoading} = useMutation('processImage', (data: TProcessImage) => UploadResource.Process(data), {
         onSuccess: ({data}) => {
+            let downloadElement = document.createElement('a');
+            downloadElement.setAttribute('href', 'https://api.watermarker.space/'+data.link+'?download');
+            downloadElement.setAttribute('download', 'https://api.watermarker.space/'+data.link+'?download');
+            downloadElement.click();
         },
         onError: () => {
             toast.error("Произошла ошибка сервера")

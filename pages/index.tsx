@@ -7,21 +7,18 @@ import Parameters from "../components/Parameters";
 import Workspace from "../components/Workspace";
 import Resource from "../components/Resource";
 import {observer} from "mobx-react-lite";
-import { useModal } from '../hook/useModal';
+import Modals from '../components/Modal/Modals';
 
 const Home: NextPage = observer(() => {
-    const {Primary, Download} = useModal()
-
     return (
         <MainLayout>
             <InstrumentsBar data={Instruments} />
             <Workspace />
-            <div className={style.side}>
-                <Resource/>
-                <Parameters/>
-            </div>
-            <Primary />  {/*общий блок модал*/}
-            <Download />
+                <div className={style.side}>
+                    <Resource/>
+                    <Parameters/>
+                </div>
+            <Modals />
         </MainLayout>
     )
 })

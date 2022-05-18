@@ -1,6 +1,3 @@
-import * as React from 'react';
-import {string} from "prop-types";
-
 type TStateScale = {
     value: number,
     set: (v: number) => void

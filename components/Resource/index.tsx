@@ -71,7 +71,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
     const [list, setList] = React.useState<number>(1);
 
     const loader = ({src}: any) => {
-        return "http://localhost/Watermark_backend" + src;
+        return "https://api.watermarker.space/uploads/" + src;
     }
 
     const activeBtn = {

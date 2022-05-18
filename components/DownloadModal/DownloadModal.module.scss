@@ -3,6 +3,7 @@
 .btn_group{
   width: 100%;
   display: flex;
+  margin-top: 0.45em;
   justify-content: flex-end;
   gap: 0.8em;
 
@@ -31,5 +32,98 @@
       background: $color_active_icon;
       color: $white_color;
     }
+  }
+}
+
+.download_block{
+  width: 100%;
+  margin-top: -6px;
+  display: flex;
+  height: 38px;
+  position: relative;
+  flex-direction: row;
+  gap: 0.8em;
+
+
+  .layer_block{
+    display: inherit;
+    align-items: center;
+    height: 100%;
+    flex-grow: 1;
+    background: transparent;
+    border-radius: 0.5em;
+    border: 2px solid $button_background;
+  
+    span{
+      font-family: Inter, sans-serif;
+      font-size: 0.9em;
+      color: $white_color;
+      margin-left: 12px;
+    }
+  }
+
+  .btn{
+    position: relative;
+    display: inherit;
+    width: 38px;
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: 0.5em;
+    border: 2px solid $button_background;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    svg{
+      position: absolute;
+      fill: none;
+      width: 22px;
+      height: 22px;
+
+      path{
+        fill: $white_color;
+      }
+    }
+  }
+}
+
+.loader{
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+    div {
+      box-sizing: border-box;
+      display: block;
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      margin: 8px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      animation: loaderAnimate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    div:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    
+    div:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+
+    div:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+
+    @keyframes loaderAnimate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
   }
 }

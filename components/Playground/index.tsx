@@ -32,7 +32,7 @@ const Playground: React.FC<PlaygroundProps> = observer(({workSpaceRef, position,
                         <div ref={workSpaceRef} className={style.playground_sizer} style={playgroundSize}>
                             <motion.div className={style.playground} animate={playgroundAnimate}>
                                 {children}
-                                <motion.img src={`http://localhost/Watermark_backend/`+image.src} width={image.width} height={image.height}/>
+                                <motion.img src={`https://api.watermarker.space/uploads/`+image.src} width={image.width} height={image.height}/>
                             </motion.div>
                         </div>
                     </div>
