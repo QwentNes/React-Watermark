@@ -87,6 +87,7 @@ export type StringKeys = {
 }
 
 export type TProject = {
+    save: boolean,
     name: string,
     image: string,
     size: TSizeElement,
@@ -105,4 +106,9 @@ export type TLayer = {
 export type TProcessImage = {
     project: TProject,
     layers: Array<TLayer>
+}
+
+export type TProjectProps = {
+    name: string,
+    action: any
 }

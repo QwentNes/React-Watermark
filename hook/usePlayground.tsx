@@ -14,6 +14,7 @@ export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, positio
             try{
                 let projectParse:TImageWorkspace = JSON.parse(JSON.stringify(data))
                 playground.setWorkspace(projectParse)
+                toast.success("Проект инициализирован")
             }
             catch {
                 toast.error("Произошла ошибка")
@@ -73,9 +74,9 @@ export function usePlayground(innerRef: React.RefObject<HTMLDivElement>, positio
             }
         }
 
-        scrollRef.addEventListener("wheel", Resizer)
+        scrollRef.addEventListener("wheel", Resizer, { passive: false})
 
-        return () => scrollRef.removeEventListener("wheel", Resizer)
+        return () => scrollRef.removeEventListener("wheel", Resizer, { passive: false})
     }, [sizer])
 
     React.useEffect(() => {

@@ -4,8 +4,6 @@ import {motion} from 'framer-motion';
 import { useTooltip } from '../../hook/useTooltip';
 import {useStores} from "../../hook/useStores";
 import {StringKeys} from "../../types/main";
-import {Simulate} from "react-dom/test-utils";
-import play = Simulate.play;
 
 interface BarProps {
     data: Array<{
@@ -52,7 +50,7 @@ const BarItem: React.FC<ItemProps> = ({item}) => {
     const actionList : StringKeys = {
         "newProject": () => playground.togglePrimaryModal(),
         "saveProject": () => playground.toggleDownloadModal(),
-        "infoProject": () => {},
+        "infoProject": () => playground.togglePropertyModal(),
         "GitHub": () => {},
     }
 

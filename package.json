@@ -1,7 +1,13 @@
 {
   "name": "watermarker",
   "author": "Qwent",
-  "keywords": ["watermark", "image", "sign", "protect", "autor marker"],
+  "keywords": [
+    "watermark",
+    "image",
+    "sign",
+    "protect",
+    "autor marker"
+  ],
   "description": "Watermark overlay app",
   "version": "1.2",
   "private": true,
@@ -24,6 +30,7 @@
     "react-dom": "18.0.0",
     "react-dropzone": "^12.0.5",
     "react-hot-toast": "^2.2.0",
+    "react-loading-skeleton": "^3.1.0",
     "react-query": "^3.34.20",
     "react-range": "^1.8.12",
     "sass": "^1.50.0"

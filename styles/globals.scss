@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 //dark theme
 
 $blocks_background: #22222A;
@@ -9,6 +8,9 @@ $color_active_icon: #7844EC;
 $color_normal_icon: #5c5d62;
 $white_color: #E7E7E8;
 $button_background: #2B2B33;
+$warning_head_color: #D5A529;
+$warning_text_color: #C2BCB4;
+$warning_background: #2D282A;
 
 
 @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {

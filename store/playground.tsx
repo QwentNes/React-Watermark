@@ -1,4 +1,3 @@
-import React from 'react'
 import {makeAutoObservable} from "mobx";
 import {TImageWorkspace, TPlayground} from "../types/main";
 import toast from 'react-hot-toast';
@@ -6,6 +5,7 @@ import toast from 'react-hot-toast';
 export class playground {
     public primaryModal: boolean = true
     public downloadModal: boolean = false
+    public propertyModal: boolean = false
     public theme: string = 'dark'
 
     public config: TPlayground = {
@@ -42,6 +42,14 @@ export class playground {
 
     public togglePrimaryModal(){
         this.primaryModal = !this.primaryModal
+    }
+
+    public togglePropertyModal(){
+        if(this.config.project != ""){
+            this.propertyModal = !this.propertyModal
+            return;
+        }
+        toast.error("Проект не инициализирован");
     }
 
     public toggleDownloadModal(){
