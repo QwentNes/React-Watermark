@@ -10,7 +10,7 @@
      outline: none;
      width: 100%;
      background: transparent;
-     border: 2px solid $button_background;
+     border: 2px solid var(--input-border-var);
      border-radius: 0.45em;
      box-sizing: border-box;
      padding: 10px;
@@ -22,7 +22,7 @@
 
    input[type=submit] {
      cursor: pointer;
-     color: $white_color;
+     color: var(--submit-color-var);
      font-size: 0.825em;
      font-family: Inter, sans-serif;
      font-weight: 400;
@@ -42,7 +42,7 @@
   box-sizing: border-box;
   padding: 25px 16px;
   border-radius: 0.45em;
-  border: 2px dashed $button_background;
+  border: 2px dashed var(--input-border-var);
   align-items: center;
   justify-content: center;
   gap: 12px;

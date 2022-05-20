@@ -51,7 +51,6 @@ export function useEditor(position: TMousePosition) {
                 watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top) : null;
 
             if (event.drag && position.x && position.y) {
-                console.log(position)
                 watermarks.setParam(elementId, 'position_top', reScale(scale, position.y) - element.size.height * shareBlock('y'))
                 watermarks.setParam(elementId, 'position_left', reScale(scale, position.x) - element.size.width * shareBlock('x'))
             }

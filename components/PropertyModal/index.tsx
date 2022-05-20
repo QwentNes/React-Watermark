@@ -93,10 +93,10 @@ const PropsProject: React.FC = observer(() => {
                                             <path d="M9 18.25H7.5C4.05 18.25 1.25 15.45 1.25 12C1.25 8.55 4.05 5.75 7.5 5.75H9C9.41 5.75 9.75 6.09 9.75 6.5C9.75 6.91 9.41 7.25 9 7.25H7.5C4.88 7.25 2.75 9.38 2.75 12C2.75 14.62 4.88 16.75 7.5 16.75H9C9.41 16.75 9.75 17.09 9.75 17.5C9.75 17.91 9.41 18.25 9 18.25Z" />
                                             <path d="M16 12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z" />
                                         </svg>
-                                        <span>.../uploads/{item.initial.link}</span>
+                                        <a target={`_blank`} href={'https://api.watermarker.space/uploads/'+item.initial.link}>.../uploads/{item.initial.link}</a>
                                     </div>
                                     <div className={style.watermark_option}>
-                                        <span>размер: {Math.round(item.current.size.width)}x{Math.round(item.current.size.height)}</span>
+                                        <span>размер: {item.current.size.width}x{Math.round(item.current.size.height)}</span>
                                     </div>
                                 </div>
                             </div>

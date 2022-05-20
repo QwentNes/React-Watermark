@@ -27,7 +27,7 @@ const DownloadModal: React.FC = observer(({}) => {
                     <DownloadBtn isLoading={isLoading} click={events.onClickProcess} />
                 </div>
                 <div className={style.btn_group}>
-                    <motion.button whileTap={{scale: 0.97}} className={style.apply}>Завершить проект</motion.button>
+                    <motion.button whileTap={{scale: 0.97}} className={style.apply} onClick={events.clearProject}>Завершить проект</motion.button>
                 </div>
             </Content>
         </Modal>

@@ -72,6 +72,7 @@ export class playground {
     public clear = (): void => {
         this.config = {
             ...this.config,
+            project: "",
             link: "",
             size: {
                 width: 0,

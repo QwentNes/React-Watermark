@@ -1,12 +1,13 @@
 @import "./styles/globals.scss";
 
 .modal_wrap {
+  @include scrollbars(0px, gray);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100%; 
   overflow-y: auto;
   top: 0;
   left: 0;
@@ -29,6 +30,7 @@
     padding: 2.1em 1.75em;
     border-radius: 1em;
     box-shadow: 0 0 0.5em $gray_background;
+    z-index: 99;
 
     .header {
       width: 100%;
@@ -71,11 +73,12 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: flex-start;
-  background: #2D282A;
+  background: $warning_background;
   box-sizing: border-box;
   border-radius: 0.45em;
   padding: 14px 16px;
   gap: 16px;
+  border: var(--warning-border-var);
 
   .wrap {
     display: flex;
@@ -90,13 +93,13 @@
       height: 21px;
       font-size: 0.825em;
       font-weight: 600;
-      color: #D5A529;
+      color: $warning_head_color;
     }
 
     .warn_description {
       font-size: 0.755em;
       font-weight: 400;
-      color: #C2BCB4;
+      color: $warning_text_color
     }
   }
 
@@ -106,7 +109,7 @@
       height: 21px;
 
       path {
-        fill: #D5A529;
+        fill: $warning_head_color;
       }
     }
   }

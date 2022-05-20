@@ -21,4 +21,8 @@ export class resource {
         })
         toast.success(`Загружены новые ресурсы`)
     }
+
+    public clear = () => {
+        this.elements = []
+    }
 }

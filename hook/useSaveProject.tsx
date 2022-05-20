@@ -3,9 +3,11 @@ import {useMutation} from "react-query";
 import {TProcessImage} from "../types/main";
 import {UploadResource} from "../service/uploadResource";
 import toast from "react-hot-toast";
+import { useStores } from "./useStores";
 
 export function useSaveProject() {
     const {Data} = useDataProject()
+    const {playground, resource, watermarks} = useStores()
 
     const {mutateAsync, isLoading} = useMutation('processImage', (data: TProcessImage) => UploadResource.Process(data), {
         onSuccess: ({data}) => {
@@ -23,8 +25,17 @@ export function useSaveProject() {
         await mutateAsync(Data())
     }
 
+    const finishProject = () => {
+        playground.toggleDownloadModal()
+        playground.clear()
+        resource.clear()
+        watermarks.clear()
+        toast.success("Проект завершен")
+    }
+
     const events = {
-        "onClickProcess": () => processImage()
+        "onClickProcess": () => processImage(),
+        "clearProject": () => finishProject(),
     }
 
     return {events, isLoading}

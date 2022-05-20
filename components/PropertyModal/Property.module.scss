@@ -10,6 +10,8 @@
     gap: 0.65em;
     margin-top: -20px;
     box-sizing: border-box;
+    user-select: none;
+    border: var(--warning-border-var);
 
     .icon {
         box-sizing: border-box;
@@ -82,6 +84,7 @@
     box-sizing: border-box;
     align-items: center;
     gap: 0.65em;
+    user-select: none;
 
     svg {
         display: flex;
@@ -161,7 +164,7 @@
                     }
                 }
 
-                span {
+                a {
                     font-size: 0.82em;
                     font-family: Inter, sans-serif;
                     color: $color_normal_icon;

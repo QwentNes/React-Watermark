@@ -36,7 +36,7 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-        background: $blocks_background;
+        background: var(--block-theme-var);
         height: 32px;
         width: 94px;
         border-radius: 1.5em;
@@ -81,7 +81,7 @@
         .marker{
             width: 47px;
             height: 100%;
-            background-color: $button_background;
+            background-color: var(--marker-theme-var);
             border-radius: 1.5em;
             z-index: 1;
         }

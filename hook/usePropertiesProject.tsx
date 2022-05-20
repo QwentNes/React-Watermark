@@ -1,11 +1,12 @@
-import { useStores } from "./useStores"
-import { TProcessImage, TProjectProps } from "../types/main"
-import { useDataProject } from "./useDataProject"
-import { useMutation, useQuery } from "react-query"
-import { UploadResource } from "../service/uploadResource";
-import { useCallback, useEffect, useState } from "react";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { useStores } from "./useStores"
+import { TProjectProps } from "../types/main"
+import { useDataProject } from "./useDataProject"
+import { useQuery } from "react-query"
+import { UploadResource } from "../service/uploadResource";
+import { useState } from "react";
+
 
 
 export function usePropertiesProject() {
@@ -23,8 +24,6 @@ export function usePropertiesProject() {
         },
     })
 
-    console.log(isFetching)
-
     const projectProps: Array<TProjectProps> = [
         {
             "name": "Название проекта",
@@ -37,7 +36,7 @@ export function usePropertiesProject() {
         {
             "name": "Расчетный вес",
             "action": isFetching ?
-            <SkeletonTheme baseColor="#22222A" highlightColor="#1B1B23">
+            <SkeletonTheme baseColor="var(--blocks-background-var)" highlightColor="var(--black-background-var)">
                 <Skeleton style={{height: '100%', width: '65px'}} count={1} />
             </SkeletonTheme> : sizeProject
         }
