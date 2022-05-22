@@ -1,11 +1,10 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {TMousePosition} from '../types/main';
 import {useMousePosition} from './useMousePosition';
 import {useStores} from './useStores';
 
 
 export function useEditor(position: TMousePosition) {
-
     const editorRef = React.useRef(null) as React.MutableRefObject<any>
     const positionMouseEditor = useMousePosition(editorRef);
     const [fixed, setFixed] = React.useState<{ x: number, y: number }>({x: 0, y: 0})
@@ -14,101 +13,50 @@ export function useEditor(position: TMousePosition) {
     const element = watermarks.find(elementId)?.current
     const scale = playground.config.scale
 
-    const [event, setEvent] = React.useState({
-        multi: false,
-        width: false,
-        height: false,
-        drag: false,
-        turned: false,
-    })
-
-    const shareBlock = (positioning: string): number => {
-        if (fixed.y != 0 && fixed.x != 0) {
-            switch (positioning) {
-                case 'y':
-                    // @ts-ignore
-                    return fixed.y / (element.size.height * scale)
-                case 'x':
-                    // @ts-ignore
-                    return fixed.x / (element.size.width * scale)
-                default:
-                    return 0
-            }
-        }
-        return 0.5
-    }
-
     const reScale = (scale: number, pos: number): number => {
         return (1 / scale * pos)
     }
 
-    React.useEffect(() => {
-        if (element) {
-            (event.width && position.x != 0) ?
-                watermarks.setParam(elementId, 'size_width', reScale(scale, position.x) - element.position.left) : null;
-
-            (event.height && position.y != 0) ?
-                watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top) : null;
-
-            if (event.drag && position.x && position.y) {
-                watermarks.setParam(elementId, 'position_top', reScale(scale, position.y) - element.size.height * shareBlock('y'))
-                watermarks.setParam(elementId, 'position_left', reScale(scale, position.x) - element.size.width * shareBlock('x'))
-            }
-
-            if(event.turned && position.x && position.y) {
-                watermarks.setParam(elementId, 'size_width',  reScale(scale, position.x) - element.position.left );
-                watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top);
-            }
-        }
-    }, [position, event])
-
-    const DragUp = (): void => {
-        setEvent({...event, drag: false})
-    }
-
     const DragDown = (): void => {
-        setEvent({...event, drag: true})
         setFixed({
             x: positionMouseEditor.x,
             y: positionMouseEditor.y
         })
     }
-
-    const reWidthUp = (): void => {
-        setEvent({...event, width: false})
+    
+    const turned = (): void => {
+        if (element) {
+            watermarks.setParam(elementId, 'size_width',  reScale(scale, position.x) - element.position.left);
+            watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top);
+        }
     }
 
-    const reWidthDown = (): void => {
-        setEvent({...event, width: true})
+    const reWidth = (): void => {
+        if (element) {
+            watermarks.setParam(elementId, 'size_width', reScale(scale, position.x) - element.position.left);
+        }
     }
 
-    const reHeightUp = (): void => {
-        setEvent({...event, height: false})
+    const reHeight = ():void => {
+        if(element) {
+            watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top);
+        }
     }
 
-    const reHeightDown = (): void => {
-        setEvent({...event, height: true})
-    }
-
-    const TurnedUp = (): void => {
-        setEvent({...event, turned: false})
-    }
-
-    const TurnedDown = (): void => {
-        setEvent({...event, turned: true})
+    const drag = (): void => {
+        if(element && position.x != 0 && position.y != 0){
+            watermarks.setParam(elementId, 'position_top', reScale(scale, position.y) - element.size.height * fixed.y / (element.size.height * scale))
+            watermarks.setParam(elementId, 'position_left', reScale(scale, position.x) - element.size.width * fixed.x / (element.size.width * scale))
+        }
     }
 
     const eventsCallback = {
-        "DragUp": () => DragUp(),
         "DragDown": () => DragDown(),
-        "TurnedUp" : () => TurnedUp(),
-        "TurnedDown": () => TurnedDown(),
-        "reWidthUp": () => reWidthUp(),
-        "reWidthDown": () => reWidthDown(),
-        "reHeightUp": () => reHeightUp(),
-        "reHeightDown": () => reHeightDown(),
-        "clearEventsMouseUp": () => setEvent({width: false, height: false, multi: false, drag: false, turned: false}),
-        "clearEditOnClick": () => playground.setEdit(-1)
+        "turned": () => turned(),
+        "reWidth": () => reWidth(),
+        "reHeight": () => reHeight(),
+        "drag": () => drag(),
+        "clearEditOnClick": () => playground.setEdit(-1),
     }
 
     const elementStyle: React.CSSProperties = {

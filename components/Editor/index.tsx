@@ -3,6 +3,7 @@ import style from "./Editor.module.scss"
 import { TMousePosition } from "../../types/main";
 import { observer } from "mobx-react-lite";
 import { useEditor } from "../../hook/useEditor"
+import { motion } from 'framer-motion';
 
 
 interface EditorProps {
@@ -18,20 +19,20 @@ const Editor: React.FC<EditorProps> = observer(({ position }) => {
                 ref={editorRef}
                 style={elementStyle}
                 className={style.resizer}>
-                <div className={style.center} onMouseUp={eventsCallback.DragUp}>
-                    <div className={style.drag_moving} onMouseDown={eventsCallback.DragDown} />
-                </div>
-                <div className={style.vertical} onMouseUp={eventsCallback.reWidthUp}>
-                    <div className={style.resize_width} onMouseDown={eventsCallback.reWidthDown} />
-                </div>
-                <div className={style.turned} onMouseUp={eventsCallback.TurnedUp} onMouseDown={eventsCallback.TurnedDown}>
+                <motion.div className={style.center} onMouseDown={eventsCallback.DragDown} onPan={eventsCallback.drag}>
+                    <div className={style.drag_moving} />
+                </motion.div>
+                <motion.div className={style.vertical} onPan={eventsCallback.reWidth}>
+                    <div className={style.resize_width} />
+                </motion.div>
+                <motion.div className={style.turned} onPan={eventsCallback.turned}>
                     <div className={style.resize_multi} />
-                </div>
-                <div className={style.horizontal} onMouseUp={eventsCallback.reHeightUp}>
-                    <div className={style.resize_height} onMouseDown={eventsCallback.reHeightDown} />
-                </div>
+                </motion.div>
+                <motion.div className={style.horizontal} onPan={eventsCallback.reHeight}>
+                    <div className={style.resize_height} />
+                </motion.div> 
             </div>
-            <div
+            <motion.div
                 style={{
                     background: "transparent",
                     width: "100%",
@@ -39,7 +40,6 @@ const Editor: React.FC<EditorProps> = observer(({ position }) => {
                     position: "absolute",
                     zIndex: 1
                 }}
-                onMouseUp={eventsCallback.clearEventsMouseUp}
                 onClick={eventsCallback.clearEditOnClick}
             />
         </>

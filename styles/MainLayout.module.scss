@@ -12,7 +12,8 @@
 
   .container {
     width: 1350px;
-    height: 100%;
+    height: calc(100% - 70px);
+    max-height: calc(100% - 70px);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

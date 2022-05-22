@@ -6,7 +6,7 @@ const Header: React.FC = ({}) => {
     return (
         <div className={style.header}>
             <div className={style.version}>
-                <span>Beta Version (1.1-b2)</span>
+                <span>Beta Version (1.1-b3)</span>
             </div>
             <div className={style.logo}>
                 <span>Watermarker</span><span className={style.domen}>.space</span>
