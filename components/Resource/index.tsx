@@ -67,7 +67,7 @@ interface GridProps {
 }
 
 const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) => {
-    const {resource, watermarks} = useStores()
+    const {resource, watermarks, playground} = useStores()
     const [list, setList] = React.useState<number>(1);
 
     const loader = ({src}: any) => {
@@ -83,7 +83,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
         <>
             <div className={style.header}>
                 <div className={style.title}>
-                    <span>Исходные файлы</span>
+                    <span>Водяные знаки</span>
                 </div>
                 <div className={style.toggle}>
                     <button
@@ -108,7 +108,7 @@ const GridResource: React.FC<GridProps> = observer(({isDragActive, isLoading}) =
                 {
                     resource.elements.slice((list - 1) * 4, list * 4).map((item, index) => {
                         return <Image
-                            onClick={() => watermarks.push(item)}
+                            onClick={() => watermarks.push(item, {maxWidth: playground.config.size.width, maxHeight: playground.config.size.height})}
                             loader={loader}
                             src={item.link}
                             key={`res_image`+index}

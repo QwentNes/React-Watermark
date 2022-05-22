@@ -1,6 +1,6 @@
 import React from 'react'
-import {makeAutoObservable} from "mobx";
-import {ProxyElement, TResource} from "../types/main";
+import { makeAutoObservable } from "mobx";
+import { ProxyElement, TMaxSizeWatermark, TResource } from "../types/main";
 import toast from 'react-hot-toast';
 
 const POSITION_TOP = "position_top"
@@ -18,14 +18,18 @@ export class watermarks {
     public list: Array<ProxyElement> = []
 
     constructor() {
-        makeAutoObservable(this, {}, {deep: true})
+        makeAutoObservable(this, {}, { deep: true })
     }
 
-    public clear = ():void =>{
+    public clear = (): void => {
         this.list = [];
     }
 
-    public push = (data: TResource): void => {
+    public push = (data: TResource, deps: TMaxSizeWatermark): void => {
+        let wScale = deps.maxWidth / data.size.width
+        let hScale = deps.maxHeight / data.size.height
+        let innerScale = Math.min(wScale, hScale)
+
         let newElement: ProxyElement = {
             id: this.index++,
             initial: {
@@ -43,18 +47,19 @@ export class watermarks {
                     left: 0,
                 },
                 size: {
-                    width: data.size.width,
-                    height: data.size.height
+                    width: data.size.width * innerScale,
+                    height: data.size.height * innerScale,
                 },
                 zIndex: 1,
             }
         }
-        if(this.list.length > 20){
-            toast('На рабочей области более 20 изображений. Это может снизить производительность вашего устройства', {
-                duration: 6000,
-                icon: '👀',
-            });
-        }
+
+        innerScale < 1 && toast('Размер водяного знака был автоматически адаптирован под проект');
+        this.list.length > 20 && toast('На рабочей области более 20 изображений. Это может снизить производительность вашего устройства', {
+            duration: 6000,
+            icon: '👀',
+        });
+
         this.list.push(newElement)
     }
 
@@ -81,9 +86,11 @@ export class watermarks {
                     item.position.left = value
                     break;
                 case SIZE_WIDTH:
+                    if(value > 160)
                     item.size.width = value
                     break;
                 case SIZE_HEIGHT:
+                    if(value > 160)
                     item.size.height = value
                     break;
                 case MODE:

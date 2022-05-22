@@ -57,6 +57,11 @@ export type ProxyElement = {
     current: TConfig
 }
 
+export type TMaxSizeWatermark = {
+    maxWidth: number,
+    maxHeight: number
+}
+
 export type TMousePosition = {
     x: number,
     y: number
