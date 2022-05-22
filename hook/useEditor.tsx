@@ -56,9 +56,8 @@ export function useEditor(position: TMousePosition) {
             }
 
             if(event.turned && position.x && position.y) {
-                let Diagonal = (reScale(scale, position.y) - element.position.left + reScale(scale, position.x) - element.position.top) / 2;
-                watermarks.setParam(elementId, 'size_width', Diagonal);
-                watermarks.setParam(elementId, 'size_height', Diagonal);
+                watermarks.setParam(elementId, 'size_width',  reScale(scale, position.x) - element.position.left );
+                watermarks.setParam(elementId, 'size_height', reScale(scale, position.y) - element.position.top);
             }
         }
     }, [position, event])
@@ -107,7 +106,9 @@ export function useEditor(position: TMousePosition) {
         "reWidthUp": () => reWidthUp(),
         "reWidthDown": () => reWidthDown(),
         "reHeightUp": () => reHeightUp(),
-        "reHeightDown": () => reHeightDown()
+        "reHeightDown": () => reHeightDown(),
+        "clearEventsMouseUp": () => setEvent({width: false, height: false, multi: false, drag: false, turned: false}),
+        "clearEditOnClick": () => playground.setEdit(-1)
     }
 
     const elementStyle: React.CSSProperties = {
@@ -115,25 +116,9 @@ export function useEditor(position: TMousePosition) {
         height: element?.size.height,
         top: element?.position.top,
         left: element?.position.left,
+        
     }
 
-    const StopSizer = useCallback(
-        () => {
-            return (
-                <div
-                    style={{
-                        background: "transparent",
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                        zIndex: 1
-                    }}
-                    onMouseUp={() => setEvent({width: false, height: false, multi: false, drag: false, turned: false})}
-                    onClick={() => playground.setEdit(-1)}
-                />
-            )
-        }, [])
-
-    return {elementStyle, editorRef, eventsCallback, StopSizer}
+    return {elementStyle, editorRef, eventsCallback}
 
 }
